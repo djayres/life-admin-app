@@ -1,6 +1,6 @@
 {
   "name": "life-admin-app",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "description": "Life Admin for Android: opens Darren's Life Admin page in a Chrome tab with his Claude login",
   "scripts": { "sync": "cap sync android" },
