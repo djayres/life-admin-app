@@ -74,7 +74,6 @@ button.ghost{background:none;color:#fff;border:1px solid rgba(255,255,255,.5);mi
     clearTimeout(timer);
     var tries=0;
     timer=setTimeout(function go(){ if(plugins().Browser||++tries>10){open()} else timer=setTimeout(go,150) },2000);
-    setTimeout(function(){ $("open").hidden=false },6000);
   }
 
   function ask(){
