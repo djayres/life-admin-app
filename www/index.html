@@ -6,30 +6,55 @@
 <title>Life Admin</title>
 <style>
 html,body{margin:0;height:100%}
-body{background:linear-gradient(135deg,#11834a,#03401f);color:#fff;font:16px/1.5 system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:env(safe-area-inset-top) 24px env(safe-area-inset-bottom);box-sizing:border-box;text-align:center}
-img{width:160px;height:160px;border-radius:36px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
-button{min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif}
-p{margin:0;opacity:.85;max-width:320px;font-size:15px}
+body{background:radial-gradient(circle at 50% 38%,#1a9a58 0,#0b6b3a 45%,#03401f 100%);color:#fff;font:16px/1.4 system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:env(safe-area-inset-top) 24px env(safe-area-inset-bottom);box-sizing:border-box;text-align:center}
+img{width:168px;height:168px;border-radius:38px;box-shadow:0 16px 48px rgba(0,0,0,.35);animation:pop .7s cubic-bezier(.2,1.4,.4,1) both}
+h1{margin:0;font-size:30px;font-weight:300;letter-spacing:.3px;animation:fade .6s .25s both}
+p{margin:0;opacity:.8;font-size:15px;animation:fade .6s .45s both}
+.bar{width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:#fff;animation:load 1.8s .2s ease-in-out forwards}
+button{display:none;min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:none}}
+@keyframes load{to{width:100%}}
+@media (prefers-reduced-motion:reduce){img,h1,p,.bar i{animation:none}.bar i{width:100%}}
 </style>
 </head>
 <body>
 <img src="logo.svg" alt="Life Admin">
+<h1 id="hi">Hello, Darren</h1>
+<p id="sub">Getting your life admin…</p>
+<div class="bar"><i></i></div>
 <button id="open">Open Life Admin</button>
-<p id="note">Opens your Life Admin in Chrome, using your Claude login.</p>
-<script type="module">
-const URL_="https://claude.ai/artifact/37YJK3ing21Rw7bVb3PY54";
-const cap=window.Capacitor, Browser=cap?.Plugins?.Browser, App=cap?.Plugins?.App;
-let opening=false;
-async function open(){
-  if(opening)return;opening=true;
-  try{ if(Browser) await Browser.open({url:URL_,toolbarColor:"#0a6136",presentationStyle:"fullscreen"}); else location.href=URL_; }
-  catch(e){ document.getElementById("note").textContent="Couldn't open Chrome: "+(e&&e.message||e); }
-  setTimeout(()=>opening=false,1500);
-}
-document.getElementById("open").addEventListener("click",open);
-open();
-App?.addListener("appStateChange",s=>{ if(s.isActive) open(); });
-Browser?.addListener("browserFinished",()=>{ App?.minimizeApp?.(); });
+<script>
+(function(){
+  var URL_="https://claude.ai/artifact/37YJK3ing21Rw7bVb3PY54";
+  var h=new Date().getHours();
+  var greet=h<5?"Up late, Darren":h<12?"Good morning, Darren":h<17?"Good afternoon, Darren":"Good evening, Darren";
+  document.getElementById("hi").textContent=greet;
+  var btn=document.getElementById("open"), busy=false;
+  function plugins(){var c=window.Capacitor;return c&&c.Plugins?c.Plugins:{}}
+  function open(){
+    if(busy)return; busy=true;
+    var B=plugins().Browser;
+    var done=function(){setTimeout(function(){busy=false},1500)};
+    if(B&&B.open){
+      B.open({url:URL_,toolbarColor:"#0a6136"}).then(done,function(e){
+        document.getElementById("sub").textContent="Couldn't open Chrome. Tap below to try again.";btn.style.display="block";done();});
+    } else { location.href=URL_; }
+  }
+  btn.addEventListener("click",open);
+  // give the splash 2 seconds, then open (wait for the native bridge if it isn't ready yet)
+  var tries=0;
+  setTimeout(function go(){ if(plugins().Browser||++tries>10){open()} else setTimeout(go,150) },2000);
+  // after showing a fallback button for any reason, keep it available
+  setTimeout(function(){btn.style.display="block"},6000);
+  var App=plugins().App;
+  if(App&&App.addListener){
+    App.addListener("appStateChange",function(s){ if(s.isActive){ setTimeout(open,600) } });
+  }
+  var B=plugins().Browser;
+  if(B&&B.addListener){ B.addListener("browserFinished",function(){ var A=plugins().App; if(A&&A.minimizeApp)A.minimizeApp(); }); }
+})();
 </script>
 </body>
 </html>
