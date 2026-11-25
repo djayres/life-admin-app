@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Life Admin</title>
+<style>
+html,body{margin:0;height:100%}
+body{background:linear-gradient(135deg,#11834a,#03401f);color:#fff;font:16px/1.5 system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:env(safe-area-inset-top) 24px env(safe-area-inset-bottom);box-sizing:border-box;text-align:center}
+img{width:160px;height:160px;border-radius:36px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+button{min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif}
+p{margin:0;opacity:.85;max-width:320px;font-size:15px}
+</style>
+</head>
+<body>
+<img src="logo.svg" alt="Life Admin">
+<button id="open">Open Life Admin</button>
+<p id="note">Opens your Life Admin in Chrome, using your Claude login.</p>
+<script type="module">
+const URL_="https://claude.ai/artifact/37YJK3ing21Rw7bVb3PY54";
+const cap=window.Capacitor, Browser=cap?.Plugins?.Browser, App=cap?.Plugins?.App;
+let opening=false;
+async function open(){
+  if(opening)return;opening=true;
+  try{ if(Browser) await Browser.open({url:URL_,toolbarColor:"#0a6136",presentationStyle:"fullscreen"}); else location.href=URL_; }
+  catch(e){ document.getElementById("note").textContent="Couldn't open Chrome: "+(e&&e.message||e); }
+  setTimeout(()=>opening=false,1500);
+}
+document.getElementById("open").addEventListener("click",open);
+open();
+App?.addListener("appStateChange",s=>{ if(s.isActive) open(); });
+Browser?.addListener("browserFinished",()=>{ App?.minimizeApp?.(); });
+</script>
+</body>
+</html>

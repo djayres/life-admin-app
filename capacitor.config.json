@@ -1,0 +1,7 @@
+{
+  "appId": "com.djayres.lifeadmin",
+  "appName": "Life Admin",
+  "webDir": "www",
+  "android": { "backgroundColor": "#0a6136" },
+  "plugins": { "SystemBars": { "insetsHandling": "css", "style": "LIGHT" } }
+}

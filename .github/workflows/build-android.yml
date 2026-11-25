@@ -1,0 +1,84 @@
+name: Build Android app
+
+# Builds on every code change, and can be run by hand from the Actions tab.
+# and can be run by hand from the Actions tab.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "data/**"
+      - "README.md"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Prepare Android tools
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platforms;android-36" "build-tools;36.0.0" "platform-tools"
+
+      - name: Install packages
+        run: npm ci
+
+
+      - name: Create the Android project
+        run: |
+          npx cap add android
+          npx @capacitor/assets generate --android \
+            --iconBackgroundColor '#0a6136' --iconBackgroundColorDark '#0a6136' \
+            --splashBackgroundColor '#0a6136' --splashBackgroundColorDark '#0a6136'
+
+      - name: Set version (build number goes up every run)
+        run: |
+          VERSION_NAME=$(node -p "require('./package.json').version")
+          sed -i "s/versionCode 1$/versionCode ${{ github.run_number }}/" android/app/build.gradle
+          sed -i "s/versionName \"1.0\"/versionName \"$VERSION_NAME.${{ github.run_number }}\"/" android/app/build.gradle
+          grep -n "versionCode\|versionName" android/app/build.gradle
+
+      - name: Copy the web app into the Android project
+        run: npx cap sync android
+
+      - name: Use the fixed signing key (so new builds install over old ones)
+        run: |
+          mkdir -p ~/.android
+          cp signing/debug.keystore ~/.android/debug.keystore
+
+      - name: Build APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+          cp app/build/outputs/apk/debug/app-debug.apk "$GITHUB_WORKSPACE/Life-Admin.apk"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: life-admin-apk
+          path: Life-Admin.apk
+
+      - name: Publish as the latest release (direct phone download link)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest Life-Admin.apk \
+            --title "Life Admin app (build ${{ github.run_number }})" \
+            --notes "Built $(date -u '+%d %b %Y %H:%M') UTC. Download Life-Admin.apk on your phone and open it to install." \
+            --latest
