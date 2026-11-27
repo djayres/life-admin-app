@@ -116,8 +116,16 @@ label.up{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;b
 #gsignin{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at 50% 35%,#4cc13a 0,#14873f 45%,#033a1c 100%);color:#fff;display:grid;place-items:center;padding:24px;text-align:center}
 #gsignin .gs-in{max-width:340px}#gsignin img{border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.3)}#gsignin h1{font-weight:300;font-size:34px;margin:18px 0 8px}#gsignin p{opacity:.9;line-height:1.5}
 #gsbtn{margin:18px 0 14px;min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif;cursor:pointer}#gsignin small{opacity:.75;display:block}#gsbtn{display:block;margin:18px auto 14px}
-#a2hs{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:50;background:#0b2540;color:#fff;border-radius:14px;padding:12px 44px 12px 14px;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.3)}#a2hs button{position:absolute;right:6px;top:6px;background:none;border:0;color:#fff;font-size:20px;min-width:36px;min-height:36px}
+#a2hs{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:50;background:#0b2540;color:#fff;border-radius:14px;padding:12px 44px 12px 14px;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.3)}#a2hs button.x{position:absolute;right:6px;top:6px;background:none;border:0;color:#fff;font-size:20px;min-width:36px;min-height:36px}
 header{padding-top:max(14px,env(safe-area-inset-top))}
+#splash{position:fixed;inset:0;z-index:98;background:radial-gradient(circle at 50% 38%,#4cc13a 0,#14873f 45%,#033a1c 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:24px;transition:opacity .45s}
+#splash.out{opacity:0;pointer-events:none}#splash img{width:150px;height:150px;border-radius:34px;box-shadow:0 16px 48px rgba(0,0,0,.35);animation:sp-pop .7s cubic-bezier(.2,1.4,.4,1) both}
+#splash h1{margin:0;font:300 30px system-ui,sans-serif;animation:sp-fade .6s .25s both}#splash p{margin:0;opacity:.85;animation:sp-fade .6s .45s both}
+#splash .bar{width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.25);overflow:hidden}#splash .bar i{display:block;height:100%;width:0;background:#fff;animation:sp-load 1.6s .2s ease-in-out forwards}
+#splash form{display:flex;flex-direction:column;gap:12px;width:min(300px,100%)}#splash input{min-height:52px;border-radius:14px;border:0;padding:0 16px;font:18px system-ui,sans-serif;text-align:center;color:#064d27}
+#splash button{min-height:52px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif}
+@keyframes sp-pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}@keyframes sp-fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}@keyframes sp-load{to{width:100%}}
+#a2hs .inst{display:inline-block;margin-top:8px;background:#4cc13a;color:#04210f;border:0;border-radius:20px;padding:8px 18px;font:700 15px system-ui,sans-serif;position:static;min-height:40px}
 .signout{display:block;margin:24px auto 8px;background:none;border:0;color:var(--muted);text-decoration:underline;font:14px inherit;min-height:44px}
 </style>
 </head>
@@ -600,12 +608,34 @@ let tries=0;(function wait(){if(window.claude)return boot();if(++tries<20)return
 }
 </script>
 <script>
-(function(){var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
- var sa=navigator.standalone===true||matchMedia("(display-mode: standalone)").matches;var seen=false;try{seen=localStorage.getItem("la_a2hs")}catch(e){}
- if(!sa&&!seen&&!document.getElementById("gsignin")){var d=document.createElement("div");d.id="a2hs";
-  d.innerHTML=(ios?"Put Life Admin on your home screen: tap <b>Share</b> then <b>Add to Home Screen</b>.":"Put Life Admin on your home screen: tap <b>\u22ee</b> then <b>Install app</b> (or Add to Home screen).")+'<button aria-label="Close">\u00d7</button>';
-  d.querySelector("button").onclick=function(){d.remove();try{localStorage.setItem("la_a2hs","1")}catch(e){}};document.body.appendChild(d)}
- var v=document.getElementById("vault");if(v&&window.LA_signOut){var b=document.createElement("button");b.className="signout";b.textContent="Sign out";b.onclick=window.LA_signOut;v.parentNode.appendChild(b)}})();
+(function(){
+ function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+ var signedOut=!!document.getElementById("gsignin");
+ var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ var sa=navigator.standalone===true||matchMedia("(display-mode: standalone)").matches;
+ /* opening screen: greeting by name */
+ if(!signedOut){
+  var sp=document.createElement("div");sp.id="splash";document.body.appendChild(sp);
+  var greet=function(n){var h=new Date().getHours();return (h<5?"Up late, ":h<12?"Good morning, ":h<17?"Good afternoon, ":"Good evening, ")+n};
+  var show=function(n){sp.innerHTML='<img src="icon-512.png" alt=""><h1>'+greet(n).replace(/[<>&]/g,"")+'</h1><p>Getting your life admin…</p><div class="bar"><i></i></div>';
+   setTimeout(function(){sp.classList.add("out");setTimeout(function(){sp.remove()},500)},1900)};
+  var name=ls("la_name");
+  if(name)show(name);else{sp.innerHTML='<img src="icon-512.png" alt=""><h1>Welcome to Life Admin</h1><p>What should I call you?</p><form><input placeholder="Your first name" aria-label="Your first name" maxlength="30" autocomplete="given-name"><button>Let’s go</button></form>';
+   var f=sp.querySelector("form");f.onsubmit=function(ev){ev.preventDefault();var v=f.querySelector("input").value.trim();if(!v)return;v=v.charAt(0).toUpperCase()+v.slice(1);ls("la_name",v);show(v)};
+   setTimeout(function(){var i=sp.querySelector("input");if(i)i.focus()},300)}
+ }
+ /* install prompt */
+ var deferred=null,bar=null;
+ function banner(html){if(bar||sa)return;bar=document.createElement("div");bar.id="a2hs";bar.innerHTML=html+'<button class="x" aria-label="Close">×</button>';
+  bar.querySelector(".x").onclick=function(){bar.remove();ls("la_a2hs","1")};document.body.appendChild(bar)}
+ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();deferred=e;if(bar)bar.remove(),bar=null;
+  banner('<b>Get the Life Admin app</b><br>Install it on your phone: full screen, with its own icon.<br><button class="inst">Install</button>');
+  bar.querySelector(".inst").onclick=function(){deferred.prompt();deferred.userChoice.then(function(){bar&&bar.remove();bar=null})}});
+ window.addEventListener("appinstalled",function(){if(bar)bar.remove();bar=null});
+ setTimeout(function(){if(!sa&&!deferred&&!ls("la_a2hs"))banner(ios?"<b>Get the Life Admin app</b><br>Tap <b>Share</b> (square with arrow) then <b>Add to Home Screen</b>.":"<b>Get the Life Admin app</b><br>Tap Chrome’s <b>⋮</b> menu then <b>Add to Home screen</b> / <b>Install app</b>.")},2500);
+ if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
+ var v=document.getElementById("vault");if(v&&window.LA_signOut){var b=document.createElement("button");b.className="signout";b.textContent="Sign out";b.onclick=window.LA_signOut;v.parentNode.appendChild(b)}
+})();
 </script>
 </body>
 </html>
