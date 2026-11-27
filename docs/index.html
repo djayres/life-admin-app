@@ -230,7 +230,7 @@ async function findSheet(){
  const p=await call(GD,"search_files",{query:"title = "+q(TITLE)+" and mimeType = 'application/vnd.google-apps.spreadsheet' and owner = 'me' and trashed = false",pageSize:5,excludeContentSnippets:true});
  const f=(p?.files||p?.items||p?.content?.files||[])[0];return f?.id||null}
 async function loadAll(){
- for(const k of Object.keys(TABS)){try{D[k]=vals(await call(GS,"get_values",{spreadsheetId:SHEET,range:q(TABS[k])+"!A1:N300"}));if(!D[k].length)D[k]=[HEAD[k]]}catch(e){D[k]=[HEAD[k]];if(k==="fam"||k==="gifts"||k==="notes")MISSING.add(k)}}
+ await Promise.all(Object.keys(TABS).map(async k=>{try{D[k]=vals(await call(GS,"get_values",{spreadsheetId:SHEET,range:q(TABS[k])+"!A1:N300"}));if(!D[k].length)D[k]=[HEAD[k]]}catch(e){D[k]=[HEAD[k]];if(k==="fam"||k==="gifts"||k==="notes")MISSING.add(k)}}));
  render()}
 async function put(range,values){return call(GS,"update_values",{spreadsheetId:SHEET,range,values})}
 async function ensureTab(k){if(!MISSING.has(k))return;try{await call(GS,"update_spreadsheet",{spreadsheetId:SHEET,requests:[{addSheet:{properties:{title:TABS[k],gridProperties:{frozenRowCount:1}}}}]})}catch(e){}
