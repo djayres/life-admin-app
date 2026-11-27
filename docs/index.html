@@ -2,126 +2,610 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Life Admin</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Life Admin">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0a6136">
+<meta name="theme-color" content="#0b2540">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" href="icon-192.png">
 <link rel="manifest" href="manifest.json">
+<script src="config.js"></script>
+<script src="shell.js"></script>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%0A%3Cdefs%3E%3CradialGradient%20id%3D%22la-bg%22%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.72%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%239be22d%22%2F%3E%3Cstop%20offset%3D%220.32%22%20stop-color%3D%22%234cc13a%22%2F%3E%3Cstop%20offset%3D%220.68%22%20stop-color%3D%22%2314873f%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23033a1c%22%2F%3E%3C%2FradialGradient%3E%0A%3CradialGradient%20id%3D%22la-glow%22%20cx%3D%220.5%22%20cy%3D%220.5%22%20r%3D%220.5%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23e6ff7a%22%20stop-opacity%3D%220.55%22%2F%3E%3Cstop%20offset%3D%220.55%22%20stop-color%3D%22%23b8f046%22%20stop-opacity%3D%220.18%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23b8f046%22%20stop-opacity%3D%220%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%0A%3Crect%20class%3D%22la-tile%22%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22url%28%23la-bg%29%22%2F%3E%3Crect%20class%3D%22la-tile%22%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22116%22%20fill%3D%22url%28%23la-glow%29%22%2F%3E%0A%3Cg%20class%3D%22la-sun%22%3E%3Cg%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%280%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2810%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2820%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%2830%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2840%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2850%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%2860%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2870%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%2880%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%2890%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28100%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28110%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28120%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28130%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28140%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28150%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28160%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28170%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28180%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28190%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28200%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28210%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28220%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28230%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28240%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28250%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28260%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28270%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28280%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28290%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28300%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28310%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28320%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2240%22%20width%3D%227%22%20height%3D%2270%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%221%22%20transform%3D%22rotate%28330%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28340%20256%20256%29%22%2F%3E%3Crect%20x%3D%22252.5%22%20y%3D%2252%22%20width%3D%227%22%20height%3D%2254%22%20rx%3D%223.5%22%20fill%3D%22%23fff%22%20opacity%3D%220.8%22%20transform%3D%22rotate%28350%20256%20256%29%22%2F%3E%3C%2Fg%3E%0A%3Ccircle%20cx%3D%22256%22%20cy%3D%22256%22%20r%3D%22128%22%20fill%3D%22%23fff%22%2F%3E%0A%3Cpath%20d%3D%22M192.425%20243.0V208.0H202.32500000000002V235.15H219.025V243.0ZM229.925%20243.0V208.0H239.82500000000002V243.0ZM253.875%20243.0V208.0H281.325V215.65H263.775V223.35H279.225V231.0H263.775V243.0ZM292.975%20243.0V208.0H320.425V215.65H302.77500000000003V221.55H318.32500000000005V228.95H302.77500000000003V235.35H321.07500000000005V243.0Z%22%20fill%3D%22%23064d27%22%2F%3E%3Cpath%20d%3D%22M154.525%20299.0%20169.975%20264.0H179.725L195.225%20299.0H184.925L182.175%20292.2H167.375L164.625%20299.0ZM179.275%20284.9%20174.775%20273.7%20170.275%20284.9ZM202.025%20299.0V264.0H218.57500000000002Q224.375%20264.0%20228.775%20266.15Q233.175%20268.3%20235.65%20272.20000000000005Q238.125%20276.1%20238.125%20281.5Q238.125%20286.85%20235.65%20290.775Q233.175%20294.7%20228.775%20296.85Q224.375%20299.0%20218.57500000000002%20299.0ZM211.925%20291.1H218.175Q221.175%20291.1%20223.4%20289.975Q225.625%20288.85%20226.875%20286.675Q228.125%20284.5%20228.125%20281.5Q228.125%20278.45%20226.875%20276.29999999999995Q225.625%20274.15%20223.4%20273.025Q221.175%20271.9%20218.175%20271.9H211.925ZM247.32500000000002%20299.0V264.0H255.47500000000002L267.77500000000003%20284.2L279.77500000000003%20264.0H287.925L288.02500000000003%20299.0H278.925L278.82500000000005%20280.45L269.82500000000005%20295.55H265.425L256.475%20280.95V299.0ZM299.02500000000003%20299.0V264.0H308.925V299.0ZM319.975%20299.0V264.0H328.125L343.57500000000005%20282.65V264.0H353.27500000000003V299.0H345.125L329.675%20280.35V299.0Z%22%20fill%3D%22%23064d27%22%2F%3E%0A%3Cpath%20d%3D%22M210%20320%20Q256%20368%20302%20320%22%20fill%3D%22none%22%20stroke%3D%22%231f9a45%22%20stroke-width%3D%2211%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;height:100%}
-body{background:radial-gradient(circle at 50% 38%,#1a9a58 0,#0b6b3a 45%,#03401f 100%);color:#fff;font:16px/1.4 system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:env(safe-area-inset-top) 24px env(safe-area-inset-bottom);box-sizing:border-box;text-align:center}
-img{width:168px;height:168px;border-radius:38px;box-shadow:0 16px 48px rgba(0,0,0,.35);animation:pop .7s cubic-bezier(.2,1.4,.4,1) both}
-h1{margin:0;font-size:30px;font-weight:300;letter-spacing:.3px;animation:fade .6s .25s both}
-p{margin:0;opacity:.85;font-size:15px;animation:fade .6s .45s both}
-.bar{width:120px;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
-.bar i{display:block;height:100%;width:0;background:#fff}
-.bar.run i{animation:load 1.8s .2s ease-in-out forwards}
-form{display:flex;flex-direction:column;gap:12px;width:min(320px,100%);animation:fade .5s both}
-input{min-height:52px;border-radius:14px;border:0;padding:0 16px;font:18px system-ui,sans-serif;text-align:center;color:#064d27}
-button{min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif}
-button.ghost{background:none;color:#fff;border:1px solid rgba(255,255,255,.5);min-height:44px;font-weight:600;font-size:15px}
-.change{background:none;border:0;color:#fff;opacity:.6;font:14px system-ui,sans-serif;min-height:44px;padding:0 12px;text-decoration:underline}
+/* VOICE: calm household ledger; one glance tells you if life admin is sorted.
+   IDEA: a logbook page of dated entries, each with a status stamp; a weekly sweep checklist on top.
+   PICTURE: the sorted/needs-action dial and the dated list.
+   COLOUR and TYPE: deep sea ground, white cards, sky info, green tick, amber soon, pink overdue; Hanken Grotesk.
+   LAYOUT: one phone column; setup screen first time; then three swipe pages: Next up, Running costs, To check. */
+:root{color-scheme:light dark;--sea:#0a2540;--sky:#8fd3ff;--pink:#ff5c8a;--ok:#2fbf7a;--amber:#f2a93b;
+--bg:light-dark(#eef3f8,#06182b);--card:light-dark(#ffffff,#0f2c4a);--ink:light-dark(#0a2540,#eaf4ff);--muted:light-dark(#4d6178,#9db4cc);--line:light-dark(#d9e3ee,#1d3e61)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Hanken Grotesk",system-ui,sans-serif;overflow-x:clip}
+header{background:var(--sea);color:#fff;padding:18px max(5vw,16px) 0}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:4px}.logo{width:44px;height:44px;flex:none}.brand h1{margin:0}
+h1{font-weight:300;font-size:34px;line-height:1.05;margin:0 0 4px}
+.sub{color:var(--sky);font-size:14px;margin:0 0 12px;min-height:21px}
+nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}
+nav button{flex:0 0 auto;padding:0 12px;min-height:44px;border:0;background:none;color:#cfe6fb;font:600 14px "Hanken Grotesk",sans-serif;border-bottom:3px solid transparent;cursor:pointer}
+nav button[aria-selected=true]{color:#fff;border-bottom-color:var(--sky)}
+.pip{display:inline-block;min-width:20px;padding:0 6px;margin-left:6px;border-radius:10px;background:var(--pink);color:#fff;font-size:12px;line-height:20px}
+.pages{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.pages::-webkit-scrollbar{display:none}
+.page{flex:0 0 100%;scroll-snap-align:start;padding:16px max(5vw,16px) 40px}
+.inner{max-width:640px;margin:0 auto}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px}
+.hero{display:flex;gap:16px;align-items:center}
+.dial{flex:none;width:96px;height:96px}
+.hero b{display:block;font-size:26px;line-height:1.1;font-weight:700}
+.hero span{color:var(--muted);font-size:14px}
+.sweep h3,.card h3{margin:0 0 6px;font-size:15px;color:var(--muted);font-weight:600}
+.sw{display:grid;grid-template-columns:28px minmax(0,1fr);gap:2px 10px;padding:8px 0;border-top:1px solid var(--line)}
+.sw:first-of-type{border-top:0}
+.sw .ic{grid-row:1/3;width:26px;height:26px;border-radius:13px;display:grid;place-items:center;font-weight:700;color:#fff;background:var(--ok)}
+.sw.warn .ic{background:var(--amber)}.sw.bad .ic{background:var(--pink)}
+.sw b{font-weight:600}.sw b span{font-weight:400;color:var(--muted)}.sw small{color:var(--muted);font-size:13px}
+.item{display:grid;grid-template-columns:58px minmax(0,1fr) auto;gap:12px;align-items:start;background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;border-left:5px solid var(--ok)}
+.item.soon{border-left-color:var(--amber)}.item.late{border-left-color:var(--pink)}.item.none{border-left-color:var(--line)}
+.date{text-align:center;line-height:1}.date b{display:block;font-size:26px;font-weight:700}.date i{font-style:normal;font-size:13px;text-transform:uppercase;color:var(--muted)}
+.what b{display:block;font-weight:600}.what span{display:block;color:var(--muted);font-size:14px}
+.tag{font-size:13px;font-weight:600;white-space:nowrap;padding:3px 8px;border-radius:12px;background:var(--line)}
+.ok .tag{background:color-mix(in srgb,var(--ok) 22%,transparent);color:light-dark(#11663f,#7fe6b2)}
+.soon .tag{background:color-mix(in srgb,var(--amber) 25%,transparent);color:light-dark(#7a4a00,#ffd08a)}
+.late .tag{background:color-mix(in srgb,var(--pink) 22%,transparent);color:light-dark(#a1123d,#ffb0c6)}
+.act{grid-column:2/4;display:flex;gap:8px;flex-wrap:wrap}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+button.b{min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);background:none;color:var(--ink);font:600 15px "Hanken Grotesk",sans-serif;cursor:pointer}
+button.b.p{background:var(--sea);border-color:var(--sea);color:#fff}
+:root[data-theme=dark] button.b.p{background:var(--sky);border-color:var(--sky);color:var(--sea)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) button.b.p{background:var(--sky);border-color:var(--sky);color:var(--sea)}}
+button:focus-visible,input:focus-visible,label.b:focus-within{outline:3px solid var(--sky);outline-offset:2px}
+button:disabled{opacity:.5}
+label.b{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);font-weight:600;cursor:pointer}
+label.b input{position:absolute;opacity:0;width:1px;height:1px}
+h2{font-size:20px;margin:22px 0 10px}
+.total b{font-size:clamp(36px,10vw,48px);font-weight:300;line-height:1.05;display:block}.total span{color:var(--muted);font-size:14px}
+.bar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.bar .n{font-weight:600}.bar .v{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar .t{grid-column:1/3;height:8px;border-radius:4px;background:var(--line);overflow:hidden}.bar .t i{display:block;height:100%;background:var(--sky)}
+.bar .m{grid-column:1/3;color:var(--muted);font-size:13px}
+.q .top{display:flex;justify-content:space-between;gap:12px}.q b{font-weight:600}.q .amt{white-space:nowrap;font-weight:600}
+.q p{margin:6px 0 10px;color:var(--muted);font-size:15px}
+.q input{width:100%;min-height:44px;font:16px "Hanken Grotesk",sans-serif;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.done{color:var(--muted);font-size:14px;padding:8px 0;border-bottom:1px solid var(--line)}
+.msg{background:color-mix(in srgb,var(--amber) 18%,var(--card));border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:14px}
+.msg:empty{display:none}
+.busy{color:var(--muted);font-size:14px;margin-top:8px}.busy:empty{display:none}
+.tap{all:unset;cursor:pointer;display:block}.tap:focus-visible{outline:3px solid var(--sky);outline-offset:2px;border-radius:6px}
+.more,.item>.act{grid-column:1/4}.more{border-top:1px solid var(--line);padding-top:10px;margin-top:2px}
+.nt{color:var(--muted);font-size:14px;margin:0 0 8px;display:block}
+.pc{border-radius:10px;padding:8px 10px;margin:0 0 8px;background:var(--line);font-size:14px}.pc b{display:block;font-size:16px}
+.pc.up b{color:light-dark(#a1123d,#ffb0c6)}.pc.down b{color:light-dark(#11663f,#7fe6b2)}
+.qrow{display:flex;gap:8px;margin-bottom:8px}.qrow input{flex:1;min-height:44px;font:16px "Hanken Grotesk",sans-serif;padding:8px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.links{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}a.b{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:20px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px}
+.docs h4{margin:6px 0;font-size:14px;color:var(--muted)}.docs a{display:block;padding:6px 0;color:var(--ink);font-weight:600}
+label.up{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:22px;border:1px dashed var(--muted);font-weight:600;cursor:pointer;margin-top:6px}label.up input{position:absolute;opacity:0;width:1px;height:1px}
+.empty{text-align:center;color:var(--muted);padding:24px 10px}
+.note{color:var(--muted);font-size:14px}
+#setup{max-width:640px;margin:0 auto;padding:20px max(5vw,16px)}
+#setup h2{margin-top:0}
+#setup ol{padding-left:20px}#setup li{margin-bottom:6px}
 [hidden]{display:none!important}
-@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
-@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@keyframes load{to{width:100%}}
-@media (prefers-reduced-motion:reduce){img,h1,p,form,.bar i{animation:none}.bar.run i{width:100%}}
+@media (prefers-reduced-motion:no-preference){.pages{scroll-behavior:smooth}}
+.what .chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px;align-items:center}.what .chip{display:inline-block;font-size:11px;font-weight:600;padding:3px 8px;border-radius:999px;background:rgba(61,220,132,.14);color:inherit;white-space:nowrap}.chip.tx{background:rgba(255,190,60,.2)}.chip.pr{background:rgba(155,226,45,.22)}.chip.in{background:rgba(90,170,255,.18)}.chip.dc{background:rgba(10,30,60,.07)}.chips em{font-style:normal;font-size:11px;opacity:.7;margin-left:auto}
+.mini{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:10px 0;font:inherit;color:inherit}.mini:first-child{border-top:0}.mini b{display:block;font-weight:600}.mini span{display:block;color:var(--muted);font-size:14px}.mini em{display:block;font-style:normal;font-size:13px;margin-top:3px}.mini em.up{color:#b4541a;font-weight:600}.mini em.ok{color:#1f7a3f;font-weight:600}.mini.late b,.mini.soon b{color:#b4541a}.vitem h3{margin:0 0 2px}.vitem .docs h4{display:none}
+.pcard .pc{margin:0 0 8px}.pcard .links{display:flex;flex-wrap:wrap;gap:6px}.b.sm{min-height:36px;padding:6px 12px;font-size:13px}.pcard .nt:empty{display:none}.pcard .qrow{margin-top:8px}
+.b.acct{border-color:#0a6136;color:#0a6136;font-weight:700}
+.tell h3{margin:0 0 6px}.tellrow{display:flex;gap:8px;align-items:center}.tellrow input{flex:1;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:22px;padding:0 14px;font:inherit}
+.mic{flex:none;width:52px;height:52px;border-radius:50%;border:0;background:linear-gradient(145deg,#4cc13a,#0a6136);color:#fff;font-size:24px;cursor:pointer;box-shadow:0 4px 14px rgba(10,97,54,.35)}.mic.on{animation:pulse 1s infinite;background:#d6336c}
+@keyframes pulse{50%{box-shadow:0 0 0 10px rgba(214,51,108,.15)}}
+.person .ph{display:flex;align-items:center;gap:12px;margin-bottom:8px}.person h3{margin:0;font-size:19px;font-weight:800;color:inherit;text-transform:none;letter-spacing:0}.av{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e6f4ea;color:#0a6136;font-weight:800;font-size:18px}.person .bd{margin-left:auto;font-weight:700;font-size:14px;white-space:nowrap}
+.fi{display:flex;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.fi .ic{font-size:20px;width:26px;text-align:center}.fi b{display:block;font-weight:600}.fi span{display:block;color:var(--muted);font-size:14px}.fi small{display:block;color:var(--muted);font-size:12px}.fi.near b{color:#0a6136}
+.occ h4{margin:12px 0 4px;font-size:15px}.occ h4 span{font-weight:500;color:var(--muted);font-size:13px}.gi{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)}.gi div{flex:1}.gi b{display:block;font-weight:600}.gi span{color:var(--muted);font-size:14px}
+.gs{border:0;border-radius:999px;padding:6px 12px;font:700 12px inherit;min-height:32px;cursor:pointer}.s-idea{background:#eef1f5;color:#445}.s-bought{background:#dff3e4;color:#0a6136}.s-wrapped{background:#fde9c8;color:#8a5200}.s-given{background:#e5dcf7;color:#4b2a8a}
+.pname{margin:4px 0 12px;font-size:24px}.addbar{display:flex;gap:8px;align-items:center}.addbar input{flex:1;min-width:0;min-height:46px;border:1px solid var(--line);border-radius:23px;padding:0 16px;font:inherit;background:var(--card)}
+.addbar .mic{width:46px;height:46px;font-size:0;display:grid;place-items:center;box-shadow:none}
+.note-card{background:var(--card);border-radius:14px;margin-bottom:8px;overflow:hidden}.nh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;width:100%;text-align:left;background:none;border:0;padding:14px 16px;font:inherit;color:inherit;cursor:pointer}.nh b{font-weight:700;font-size:16px}.nh span{color:var(--muted);font-size:12px;white-space:nowrap}
+.nbody{padding:0 16px 4px;line-height:1.6;font-size:15px}.note-card .row{padding:4px 16px 14px;margin:0}.nedit{display:block;width:calc(100% - 32px);margin:0 16px;border:1px solid var(--line);border-radius:10px;padding:10px;font:15px/1.5 inherit}.b.del{color:#b42318}
+#gsignin{position:fixed;inset:0;z-index:99;background:radial-gradient(circle at 50% 35%,#4cc13a 0,#14873f 45%,#033a1c 100%);color:#fff;display:grid;place-items:center;padding:24px;text-align:center}
+#gsignin .gs-in{max-width:340px}#gsignin img{border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.3)}#gsignin h1{font-weight:300;font-size:34px;margin:18px 0 8px}#gsignin p{opacity:.9;line-height:1.5}
+#gsbtn{margin:18px 0 14px;min-height:52px;padding:0 28px;border-radius:26px;border:0;background:#fff;color:#064d27;font:700 17px system-ui,sans-serif;cursor:pointer}#gsignin small{opacity:.75;display:block}#gsbtn{display:block;margin:18px auto 14px}
+#a2hs{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:50;background:#0b2540;color:#fff;border-radius:14px;padding:12px 44px 12px 14px;font-size:14px;line-height:1.45;box-shadow:0 8px 24px rgba(0,0,0,.3)}#a2hs button{position:absolute;right:6px;top:6px;background:none;border:0;color:#fff;font-size:20px;min-width:36px;min-height:36px}
+header{padding-top:max(14px,env(safe-area-inset-top))}
+.signout{display:block;margin:24px auto 8px;background:none;border:0;color:var(--muted);text-decoration:underline;font:14px inherit;min-height:44px}
 </style>
 </head>
 <body>
-<img src="logo.svg" alt="Life Admin">
-<h1 id="hi">Welcome to Life Admin</h1>
-<p id="sub"></p>
+<header>
+  <div class="brand"><svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" aria-hidden="true">
+<defs><radialGradient id="la-bg" cx="0.5" cy="0.5" r="0.72"><stop offset="0" stop-color="#9be22d"/><stop offset="0.32" stop-color="#4cc13a"/><stop offset="0.68" stop-color="#14873f"/><stop offset="1" stop-color="#033a1c"/></radialGradient>
+<radialGradient id="la-glow" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#e6ff7a" stop-opacity="0.55"/><stop offset="0.55" stop-color="#b8f046" stop-opacity="0.18"/><stop offset="1" stop-color="#b8f046" stop-opacity="0"/></radialGradient></defs>
+<rect class="la-tile" width="512" height="512" rx="116" fill="url(#la-bg)"/><rect class="la-tile" width="512" height="512" rx="116" fill="url(#la-glow)"/>
+<g class="la-sun"><g><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(0 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(10 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(20 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(30 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(40 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(50 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(60 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(70 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(80 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(90 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(100 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(110 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(120 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(130 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(140 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(150 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(160 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(170 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(180 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(190 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(200 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(210 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(220 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(230 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(240 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(250 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(260 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(270 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(280 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(290 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(300 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(310 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(320 256 256)"/><rect x="252.5" y="40" width="7" height="70" rx="3.5" fill="#fff" opacity="1" transform="rotate(330 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(340 256 256)"/><rect x="252.5" y="52" width="7" height="54" rx="3.5" fill="#fff" opacity="0.8" transform="rotate(350 256 256)"/></g>
+<circle cx="256" cy="256" r="128" fill="#fff"/>
+<path d="M192.425 243.0V208.0H202.32500000000002V235.15H219.025V243.0ZM229.925 243.0V208.0H239.82500000000002V243.0ZM253.875 243.0V208.0H281.325V215.65H263.775V223.35H279.225V231.0H263.775V243.0ZM292.975 243.0V208.0H320.425V215.65H302.77500000000003V221.55H318.32500000000005V228.95H302.77500000000003V235.35H321.07500000000005V243.0Z" fill="#064d27"/><path d="M154.525 299.0 169.975 264.0H179.725L195.225 299.0H184.925L182.175 292.2H167.375L164.625 299.0ZM179.275 284.9 174.775 273.7 170.275 284.9ZM202.025 299.0V264.0H218.57500000000002Q224.375 264.0 228.775 266.15Q233.175 268.3 235.65 272.20000000000005Q238.125 276.1 238.125 281.5Q238.125 286.85 235.65 290.775Q233.175 294.7 228.775 296.85Q224.375 299.0 218.57500000000002 299.0ZM211.925 291.1H218.175Q221.175 291.1 223.4 289.975Q225.625 288.85 226.875 286.675Q228.125 284.5 228.125 281.5Q228.125 278.45 226.875 276.29999999999995Q225.625 274.15 223.4 273.025Q221.175 271.9 218.175 271.9H211.925ZM247.32500000000002 299.0V264.0H255.47500000000002L267.77500000000003 284.2L279.77500000000003 264.0H287.925L288.02500000000003 299.0H278.925L278.82500000000005 280.45L269.82500000000005 295.55H265.425L256.475 280.95V299.0ZM299.02500000000003 299.0V264.0H308.925V299.0ZM319.975 299.0V264.0H328.125L343.57500000000005 282.65V264.0H353.27500000000003V299.0H345.125L329.675 280.35V299.0Z" fill="#064d27"/>
+<path d="M210 320 Q256 368 302 320" fill="none" stroke="#1f9a45" stroke-width="11" stroke-linecap="round"/></g>
+</svg><h1>Life admin</h1></div>
+  <p class="sub" id="stamp">Opening…</p>
+  <nav role="tablist" id="nav" hidden>
+    <button role="tab" aria-selected="true" data-i="0">Next up</button>
+    <button role="tab" aria-selected="false" data-i="1">Costs</button>
+    <button role="tab" aria-selected="false" data-i="2">To check<span class="pip" id="pip" hidden></span></button>
+    <button role="tab" aria-selected="false" data-i="3">Docs</button>
+  </nav>
+</header>
 
-<form id="who" hidden>
-  <input id="name" autocomplete="given-name" placeholder="Your first name" aria-label="Your first name" maxlength="30">
-  <button type="submit">Let's go</button>
-</form>
+<section id="setup" hidden>
+  <div class="msg" id="smsg"></div>
+  <div class="card" id="noclaude" hidden>
+    <h2>Open this in Claude</h2>
+    <p>This app works through your own Claude account, so it can read your email and keep your list in your own Google Drive. Nothing goes anywhere else.</p>
+    <ol><li>Sign in to Claude (claude.ai or the Claude app).</li><li>In Settings → Connectors, add <b>Gmail</b>, <b>Google Drive</b> and <b>Google Sheets</b>.</li><li>Open this link again and tap Allow when it asks.</li></ol>
+  </div>
+  <div class="card" id="start" hidden>
+    <h2>Let's get your life admin sorted</h2>
+    <p>I'll make a private "Life Admin Tracker" sheet in your Google Drive, then look through your emails for MOTs, insurance renewals, energy and phone contracts and other bills. Anything I find comes to you to check first.</p>
+    <div class="row"><button class="b p" id="go">Set me up</button></div>
+    <p class="busy" id="sbusy"></p>
+  </div>
+</section>
 
-<div class="bar" id="bar" hidden><i></i></div>
-<button id="open" hidden>Open Life Admin</button>
-<button class="change" id="change" hidden>Not you? Change name</button>
-<div id="install" hidden style="max-width:330px;background:rgba(255,255,255,.12);border-radius:18px;padding:18px 20px;text-align:left;line-height:1.55">
-  <b style="display:block;font-size:17px;margin-bottom:6px">Put Life Admin on your home screen</b>
-  1. Tap the <b>Share</b> button (the square with the arrow) at the bottom of Safari<br>
-  2. Scroll down and tap <b>Add to Home Screen</b><br>
-  3. Tap <b>Add</b>, then open Life Admin from your home screen
-  <button class="change" id="skip" style="display:block;margin-top:8px;padding:0;opacity:.8">Skip and open it now</button>
+<div class="pages" id="pages" hidden>
+  <section class="page"><div class="inner">
+    <div class="msg" id="msg"></div>
+    <div class="card hero">
+      <svg class="dial" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="12"/><circle id="arc" cx="50" cy="50" r="42" fill="none" stroke="var(--ok)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 264" transform="rotate(-90 50 50)"/><text id="dialtxt" x="50" y="57" text-anchor="middle" font-size="24" font-weight="700" fill="currentColor"></text></svg>
+      <div><b id="headline">Checking…</b><span id="heroSub"></span></div>
+    </div>
+    <div class="card sweep"><h3>This week's sweep</h3><div id="sweep"></div>
+      <div class="row"><button class="b p" id="sweepBtn">Sweep my emails now</button><label class="b">Drop in a bank statement<input type="file" id="pdf" accept="application/pdf"></label></div>
+      <p class="busy" id="busy"></p>
+    </div>
+    <div class="card" id="bankCard"><h3>Bank</h3>
+      <p class="note" id="bankNote"></p>
+      <details><summary>Link your bank instead</summary><p class="note">If you use Claude, you can add the <b>PocketSmith</b> connector (Settings → Connectors), which links UK banks through Open Banking. Bank feeds there may need a paid PocketSmith plan. Once it's added, ask Claude in a chat to switch this app to read your bank feed.</p></details>
+    </div>
+        <div id="list"></div>
+  </div></section>
+  <section class="page"><div class="inner">
+    <div class="card total"><span>Running costs each month</span><b id="tot">£0</b><span id="totSub"></span></div>
+    <h2>Monthly bills</h2><div id="bills"></div>
+    <h2>Yearly, spread per month</h2><div id="yearly"></div>
+  </div></section>
+  <section class="page"><div class="inner">
+    <p class="note" style="margin-top:0">Things I found that aren't on your list yet. Add the ones that matter; leave off the rest.</p>
+    <div id="qs"></div>
+    <h2 id="doneH" hidden>Answered</h2><div id="answered"></div>
+  </div></section>
+  <section class="page"><div class="inner">
+    <div class="card total"><span>🔒 Document vault</span><b id="vaultN">0</b><span id="vaultSub">Policies, schedules, MOT certificates and receipts, saved privately in your Google Drive.</span></div>
+    <div id="vault"></div>
+  </div></section>
 </div>
 
+<script src="pdf.min.js"></script>
 <script>
-(function(){
-  // Darren's own Life Admin (his tracker); everyone else gets the shareable one, which sets up their own tracker
-  var DARREN="https://claude.ai/artifact/37YJK3ing21Rw7bVb3PY54";
-  var SHARED="https://claude.ai/artifact/CzS2amz5zPkn7o5wCZkEPY";
-  var $=function(id){return document.getElementById(id)};
-  function load(){try{return localStorage.getItem("la_name")||""}catch(e){return ""}}
-  function save(n){try{localStorage.setItem("la_name",n)}catch(e){}}
-  function forget(){try{localStorage.removeItem("la_name")}catch(e){}}
-  function plugins(){var c=window.Capacitor;return c&&c.Plugins?c.Plugins:{}}
-  var name=load(), busy=false, timer=null;
+{
+const GM="Gmail", GD="Google Drive", GS="Google Sheets", TITLE="Life Admin Tracker";
+const TABS={ren:"Renewals",bills:"Monthly bills",rev:"To review",log:"Change log",stamp:"Status",fam:"Family",gifts:"Presents",notes:"Notes"};
+const HEAD={ren:["Item","Who","Provider","Policy / reference","Due / renewal date","Days left","Last price (£)","How it's paid","Status","Notes","Source","Renewal quote (£)","Documents","Account link"],
+ bills:["Bill","Provider","Reference","Day of month","Latest amount (£)","Contract end / type","Notes"],
+ rev:["Found on","Payee","Amount (£)","How often","Last seen","Question","Decision","Decided on","Kind","Due date","Provider"],
+ log:["Date","Change","Detail"],stamp:["Check","When","Detail"],
+ fam:["Person","What","Date","End date","Repeats","Kind","Notes"],gifts:["For","Present","Occasion","Price (£)","Status","Where from","Added","Notes"],notes:["Person","Title","Body","Updated"]};
+const D={ren:[],bills:[],rev:[],stamp:[],log:[],fam:[],gifts:[],notes:[]};const MISSING=new Set();
+let mcp=null,sample=null,SHEET=null;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const MON=["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
+function pdate(s){s=String(s||"").trim();let m=s.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);if(m)return new Date(+m[3],m[2]-1,+m[1]);
+ m=s.match(/(\d{1,2})\s+([A-Za-z]{3})[a-z]*\s+(\d{4})/);if(m){const i=MON.indexOf(m[2].toLowerCase());if(i>=0)return new Date(+m[3],i,+m[1])}
+ m=s.match(/^(\d{4})-(\d{2})-(\d{2})/);if(m)return new Date(+m[1],m[2]-1,+m[3]);return null}
+const money=s=>{const n=parseFloat(String(s??"").replace(/[£,\s]/g,""));return isNaN(n)?0:n};
+const gbp=n=>"£"+n.toLocaleString("en-GB",{minimumFractionDigits:2,maximumFractionDigits:2});
+const today=()=>{const d=new Date();d.setHours(0,0,0,0);return d};
+const uk=d=>d.toLocaleDateString("en-GB");
+const nowStr=()=>{const d=new Date();return uk(d)+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0")};
+const q=t=>"'"+t.replace(/'/g,"''")+"'";
+const busy=t=>{$("busy").textContent=t;$("sbusy").textContent=t};
+const flash=t=>{$("msg").textContent=t;$("smsg").textContent=t};
 
-  function urlFor(n){return /^darren\b/i.test(n.trim())?DARREN:SHARED}
-  function greeting(n){var h=new Date().getHours();
-    return (h<5?"Up late, ":h<12?"Good morning, ":h<17?"Good afternoon, ":"Good evening, ")+n}
+function errText(e,srv){const c=e&&e.code,s=(e&&e.server)||srv||"a connector";
+ if(c==="needs_reauth")return s+" needs reconnecting: Claude Settings → Connectors.";
+ if(c==="server_not_connected"||c==="selection_required")return "Add the "+s+" connector in Claude Settings → Connectors, then reopen this page.";
+ if(c==="not_in_manifest"||c==="approval_required"||c==="not_granted"||c==="consent_required")return "This app needs your OK to use "+s+". Tap again and choose Allow.";
+ if(c==="tool_error")return s+" reported a problem: "+(e.message||"error").slice(0,160);
+ return "Couldn't reach "+s+" just now. Try again in a minute.";}
+async function call(srv,tool,input){const r=await mcp.callTool(srv,tool,input);let p=r.payload;if(typeof p==="string"){try{p=JSON.parse(p)}catch{}}return p}
+const vals=p=>p?.values||p?.content?.values||[];
 
-  function open(){
-    if(busy||!name)return; busy=true;
-    var B=plugins().Browser, url=urlFor(name);
-    var done=function(){setTimeout(function(){busy=false},1500)};
-    if(B&&B.open){
-      B.open({url:url,toolbarColor:"#0a6136"}).then(done,function(){
-        $("sub").textContent="Couldn't open Chrome. Tap below to try again.";$("open").hidden=false;done();});
-    } else { location.href=url; }
-  }
+/* ---------- sheet ---------- */
+async function findSheet(){
+ const p=await call(GD,"search_files",{query:"title = "+q(TITLE)+" and mimeType = 'application/vnd.google-apps.spreadsheet' and owner = 'me' and trashed = false",pageSize:5,excludeContentSnippets:true});
+ const f=(p?.files||p?.items||p?.content?.files||[])[0];return f?.id||null}
+async function loadAll(){
+ for(const k of Object.keys(TABS)){try{D[k]=vals(await call(GS,"get_values",{spreadsheetId:SHEET,range:q(TABS[k])+"!A1:N300"}));if(!D[k].length)D[k]=[HEAD[k]]}catch(e){D[k]=[HEAD[k]];if(k==="fam"||k==="gifts"||k==="notes")MISSING.add(k)}}
+ render()}
+async function put(range,values){return call(GS,"update_values",{spreadsheetId:SHEET,range,values})}
+async function ensureTab(k){if(!MISSING.has(k))return;try{await call(GS,"update_spreadsheet",{spreadsheetId:SHEET,requests:[{addSheet:{properties:{title:TABS[k],gridProperties:{frozenRowCount:1}}}}]})}catch(e){}
+ await put(q(TABS[k])+"!A1",[HEAD[k]]);D[k]=[HEAD[k]];MISSING.delete(k)}
+async function append(k,rows){await ensureTab(k);const start=Math.max(D[k].length,1)+1;await put(q(TABS[k])+"!A"+start,rows);D[k].push(...rows)}
+async function setStatus(name,detail){let i=D.stamp.findIndex(r=>r[0]===name);
+ if(i<0){i=Math.max(D.stamp.length,1);D.stamp[i]=[name,"",""]}
+ const r=[name,nowStr(),detail];await put(q(TABS.stamp)+"!A"+(i+1)+":C"+(i+1),[r]);D.stamp[i]=r}
+async function log(change,detail){await append("log",[[uk(new Date()),change,detail]])}
+async function createSheet(){
+ busy("Creating your Life Admin Tracker in Google Drive…");
+ const f=await call(GD,"create_file",{title:TITLE,contentMimeType:"application/vnd.google-apps.spreadsheet"});
+ SHEET=f?.id||f?.file?.id;if(!SHEET)throw{code:"tool_error",server:GD,message:"no file id returned"};
+ const meta=await call(GS,"get_spreadsheet",{spreadsheetId:SHEET,fields:["sheets.properties.sheetId"]});
+ const first=meta?.sheets?.[0]?.properties?.sheetId??meta?.content?.sheets?.[0]?.properties?.sheetId??0;
+ const reqs=[{updateSheetProperties:{properties:{sheetId:first,title:TABS.ren,gridProperties:{frozenRowCount:1}},fields:"title,gridProperties.frozenRowCount"}}];
+ ["rev","bills","log","stamp","fam","gifts","notes"].forEach((k,i)=>reqs.push({addSheet:{properties:{sheetId:101+i,title:TABS[k],gridProperties:{frozenRowCount:1}}}}));
+ await call(GS,"update_spreadsheet",{spreadsheetId:SHEET,requests:reqs});
+ for(const k of Object.keys(TABS)){await put(q(TABS[k])+"!A1",[HEAD[k]]);D[k]=[HEAD[k]]}
+ await put(q(TABS.stamp)+"!A2:C3",[["Emails","",""],["Bank statement","","Not checked yet: drop in a statement PDF"]]);
+ D.stamp.push(["Emails","",""],["Bank statement","","Not checked yet: drop in a statement PDF"]);
+ await log("Tracker set up","Created by the Life Admin app");
+}
 
-  function splash(){
-    $("who").hidden=true;
-    $("hi").textContent=greeting(name);
-    $("sub").textContent="Getting your life admin…";
-    var bar=$("bar");bar.hidden=false;bar.classList.remove("run");void bar.offsetWidth;bar.classList.add("run");
-    $("change").hidden=false;
-    clearTimeout(timer);
-    var tries=0;
-    timer=setTimeout(function go(){ if(plugins().Browser||++tries>10){open()} else timer=setTimeout(go,150) },2000);
-  }
+/* ---------- AI helpers ---------- */
+const KNOWN=()=>[...D.ren.slice(1).map(r=>r[0]+" / "+r[2]),...D.bills.slice(1).map(r=>r[0]+" / "+r[1]),...D.rev.slice(1).map(r=>r[1])].filter(s=>s&&s.trim()!=="/").join("; ")||"nothing yet";
+function cleanItems(v){const a=Array.isArray(v)?v:(v?.items||[]);return a.filter(x=>x&&x.payee).slice(0,25)}
+async function addFindings(items,source){
+ const rows=items.map(x=>[uk(new Date()),String(x.payee).slice(0,80),x.amount?Number(x.amount)||"":"",String(x.how_often||"").slice(0,60),String(x.last_seen||"").slice(0,20),String(x.question||"").slice(0,240),"","",x.kind==="renewal"?"renewal":"bill",String(x.due_date||"").slice(0,20),String(x.provider||"").slice(0,80)]);
+ if(rows.length)await append("rev",rows);return rows.length}
 
-  function ask(){
-    clearTimeout(timer);
-    $("hi").textContent="Welcome to Life Admin";
-    $("sub").textContent="What should I call you?";
-    $("bar").hidden=true;$("open").hidden=true;$("change").hidden=true;
-    $("who").hidden=false;$("name").value="";
-    setTimeout(function(){$("name").focus()},300);
-  }
+async function sweepEmails(){
+ if(!sample){if(window.LA_openClaude)return LA_openClaude("Email sweeps");flash("Sweeping needs Claude's help, which this view doesn't have. Open the page on claude.ai.");return}
+ $("sweepBtn").disabled=true;
+ try{
+  const queries=["MOT (due OR reminder OR expires)","insurance (renewal OR \"renewal date\" OR \"policy schedule\" OR \"auto renew\")","(energy OR electricity OR gas) (tariff OR \"fixed until\" OR \"end date\" OR switch)","(broadband OR mobile OR SIM OR \"TV licence\") (contract OR bill OR renewal)","(\"direct debit\" OR subscription OR membership) (confirmation OR renewal OR \"will renew\")","(\"vehicle tax\" OR DVLA OR \"council tax\" OR water) (bill OR \"direct debit\" OR renewal)","(HMRC OR \"self assessment\" OR \"payment on account\") (tax OR return OR reminder)"];
+  const seen=new Set(),lines=[];
+  for(const [i,qs] of queries.entries()){busy("Reading your emails ("+(i+1)+"/"+queries.length+")…");
+   const p=await call(GM,"search_threads",{query:qs+" newer_than:14m -category:promotions",pageSize:20,view:"THREAD_VIEW_SUMMARY"});
+   for(const t of (p?.threads||p?.content?.threads||[])){if(seen.has(t.id))continue;seen.add(t.id);const m=t.messages?.[0]||{};
+    lines.push([String(m.date||"").slice(0,10),m.sender||"",m.subject||"",(m.snippet||"").replace(/[͏\s]+/g," ").slice(0,220)].join(" | "))}}
+  busy("Asking Claude what needs tracking ("+lines.length+" emails)…");
+  const prompt=`You help a UK household track life admin. Below are email summaries (date | sender | subject | snippet). Find REAL recurring commitments for this person: MOT due dates, car/home/pet/travel insurance renewals, energy/broadband/mobile contracts and their end dates, subscriptions, memberships, vehicle tax, council tax, water, school fees, and HMRC Self Assessment deadlines (31 January return/payment, 31 July payment on account) if they do Self Assessment. Ignore marketing and comparison-site adverts (comparethemarket, confused.com, moneysupermarket, gocompare, newsletters) unless they state a concrete renewal date for THEIR policy. Merge duplicates; keep the latest date. Skip anything already tracked: ${KNOWN()}.
+Return ONLY a JSON array (max 20) of objects: {"payee": short name e.g. "Car insurance: Admiral", "provider": company, "kind": "renewal" (has a yearly/termly due date) or "bill" (monthly), "due_date": "dd/mm/yyyy" or "", "amount": number in pounds or null, "how_often": e.g. "Yearly", "last_seen": "dd/mm/yyyy" of the email, "question": one short plain sentence to the user, e.g. "Your Admiral car insurance renews on 03/02/2027 (£412). Track it?"}. Return [] if nothing.
 
-  $("who").addEventListener("submit",function(e){
-    e.preventDefault();
-    var n=$("name").value.trim().replace(/\s+/g," ");
-    if(!n){$("name").focus();return}
-    n=n.charAt(0).toUpperCase()+n.slice(1);
-    name=n;save(n);splash();
-  });
-  $("open").addEventListener("click",open);
-  $("change").addEventListener("click",function(){forget();name="";ask()});
+EMAILS:
+${lines.join("\n").slice(0,60000)}`;
+  const found=cleanItems(await sample.json(prompt,{modelTier:"default",cache:false}));
+  const n=await addFindings(found,"Gmail");
+  await setStatus("Emails","Gmail searched ("+lines.length+" emails); "+(n?n+" new to check":"nothing new"));
+  await log("Email sweep",lines.length+" emails read; "+n+" new to check");
+  let stmt="";try{const sp=await call(GM,"search_threads",{query:"from:me has:attachment filename:pdf statement newer_than:10d",pageSize:5,view:"THREAD_VIEW_SUMMARY"});
+   const subj=(sp?.threads||sp?.content?.threads||[]).map(t=>t.messages?.[0]?.subject||"").filter(Boolean);
+   if(subj.length)stmt=" I can see "+(subj.length>1?subj.length+" statements":"a statement")+" you emailed yourself ("+subj[0].slice(0,40)+"…): tap \u201cDrop in a bank statement\u201d and pick it to read it now, or Monday's check will read it.";}catch{}
+  busy("");flash((n?n+" new thing"+(n>1?"s":"")+" to check. Swipe to To check.":"Emails checked: nothing new.")+stmt);render();
+ }catch(e){busy("");flash(e?.code?errText(e,GM):"The sweep didn't finish: "+(e?.message||e))}
+ finally{$("sweepBtn").disabled=false}}
 
-  var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
-  var standalone=window.navigator.standalone===true||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches);
-  if(ios&&!standalone&&!plugins().Browser){
-    $("hi").textContent="Life Admin";$("sub").textContent="Bills, renewals, documents and family notes, all in one place.";
-    $("install").hidden=false;$("skip").addEventListener("click",function(){$("install").hidden=true;if(name)splash();else ask()});
-  } else if(name)splash();else ask();
+async function pdfText(file){
+ const lib=window.pdfjsLib;if(!lib)throw new Error("PDF reader didn't load");
+ lib.GlobalWorkerOptions.workerSrc="pdf.worker.min.js";
+ const doc=await lib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise;let out="";
+ for(let i=1;i<=doc.numPages&&out.length<90000;i++){const pg=await doc.getPage(i);const tc=await pg.getTextContent();
+  let lastY=null;for(const it of tc.items){const y=Math.round(it.transform[5]);out+=(lastY!==null&&y!==lastY?"\n":" ")+it.str;lastY=y}out+="\n"}
+ return out}
+async function readStatement(file){
+ if(!sample){if(window.LA_openClaude)return LA_openClaude("Reading statements");flash("Reading statements needs Claude's help, which this view doesn't have.");return}
+ try{busy("Reading "+file.name+"…");const text=await pdfText(file);
+  if(text.replace(/\s/g,"").length<200)throw new Error("I couldn't read text from that PDF (it may be a scan).");
+  busy("Asking Claude to spot regular payments…");
+  const prompt=`This is a UK bank or credit card statement as plain text. Find OUTGOING payments that recur (same payee 2+ times, Direct Debits, standing orders, subscriptions, termly fees) that are NOT already tracked: ${KNOWN()}. Ignore one-off shopping, cash, transfers between the person's own accounts, and investments. Also include any single payment over £250 to a business that looks like a bill rather than shopping.
+Return ONLY a JSON array (max 20) of {"payee": name, "provider": name, "kind": "bill" or "renewal", "due_date": "", "amount": latest amount in pounds (number), "how_often": e.g. "Monthly, 1st", "last_seen": "dd/mm/yyyy", "question": one short plain question, e.g. "£42.50 to Sky every month. Add it to your bills?"}. Also first line of your answer must be the JSON only.
 
-  var App=plugins().App;
-  if(App&&App.addListener){ App.addListener("appStateChange",function(s){ if(s.isActive&&name){ setTimeout(open,600) } }); }
-  var B=plugins().Browser;
-  if(B&&B.addListener){ B.addListener("browserFinished",function(){ var A=plugins().App; if(A&&A.minimizeApp)A.minimizeApp(); }); }
-})();
+STATEMENT:
+${text.slice(0,90000)}`;
+  const found=cleanItems(await sample.json(prompt,{modelTier:"default",cache:false}));
+  const n=await addFindings(found,"Statement");
+  const fn=file.name.toLowerCase();
+  const isCard=/flex|credit|card/.test(fn)?true:/bank_statement|bank statement|current/.test(fn)?false:/credit\s*limit|minimum\s*payment|available\s*credit/i.test(text.slice(0,4000));
+  const row=isCard?(D.stamp.find(r=>/flex|credit card/i.test(r[0]||""))||["Credit card"]):(D.stamp.find(r=>/current|bank statement|^statement/i.test(r[0]||"")&&!/flex|credit/i.test(r[0]||""))||["Bank statement"]);
+  const span=(file.name.match(/(\d{4})[-_](\d{2})[-_](\d{2})[-_](\d{4})[-_](\d{2})[-_](\d{2})/)||[]);
+  await setStatus(row[0],(isCard?"Credit card statement":"Statement")+(span[1]?" "+span[3]+"/"+span[2]+" to "+span[6]+"/"+span[5]+"/"+span[4]:"")+" read; "+(n?n+" new to check":"nothing new"));
+  await log("Statement read",file.name+": "+n+" new to check");
+  busy("");flash(n?n+" payment"+(n>1?"s":"")+" to check. Swipe to To check.":"Statement checked: nothing new.");render();
+ }catch(e){busy("");flash(e?.code?errText(e,GS):String(e?.message||e))}}
+
+/* ---------- render ---------- */
+function classify(r){const d=pdate(r[4]),st=String(r[8]||"");
+ if(/^sorted/i.test(st))return{cls:"ok",tag:"✓ "+st,d};if(/^ended/i.test(st))return{cls:"none",tag:st,d};
+ if(!d)return{cls:"none",tag:"No date",d};const days=Math.round((d-today())/864e5);
+ if(days<0)return{cls:"late",tag:"Overdue "+(-days)+"d",d};
+ if(days<=14)return{cls:"late",tag:days===0?"Today":days===1?"Tomorrow":days+" days",d};
+ if(days<=30)return{cls:"soon",tag:days+" days",d};return{cls:"ok",tag:"✓ "+days+" days",d}}
+const OPEN=new Set();
+function compareLinks(name){const n=name.toLowerCase();
+ if(/car insurance|motor/.test(n))return[["Compare the Market","https://www.comparethemarket.com/car-insurance/"],["Confused.com","https://www.confused.com/car-insurance"]];
+ if(/home insurance|buildings|contents/.test(n))return[["Compare the Market","https://www.comparethemarket.com/home-insurance/"],["MoneySuperMarket","https://www.moneysupermarket.com/home-insurance/"]];
+ if(/pet/.test(n))return[["Compare the Market pet","https://www.comparethemarket.com/pet-insurance/"],["MoneySuperMarket pet","https://www.moneysupermarket.com/pet-insurance/"]];
+ if(/insurance/.test(n))return[["Compare the Market","https://www.comparethemarket.com/"],["MoneySuperMarket","https://www.moneysupermarket.com/"]];
+ if(/energy|gas|electric/.test(n))return[["Uswitch energy","https://www.uswitch.com/gas-electricity/"],["MSE cheap energy","https://www.moneysavingexpert.com/cheapenergyclub/"]];
+ if(/broadband/.test(n))return[["Uswitch broadband","https://www.uswitch.com/broadband/"]];
+ if(/mobile|sim/.test(n))return[["Uswitch SIM only","https://www.uswitch.com/mobiles/sim_only_deals/"]];
+ if(/^tax|self assessment|hmrc/.test(n))return[["HMRC online account","https://www.gov.uk/log-in-file-self-assessment-tax-return"],["Pay your tax bill","https://www.gov.uk/pay-self-assessment-tax-bill"]];
+ if(/mot/.test(n))return[["Check MOT history","https://www.gov.uk/check-mot-history"]];
+ return[]}
+function acctLink(r){const u=String(r[13]||"").trim();if(/^https:\/\//.test(u))return u;const p=(String(r[2]||"")+" "+r[0]).toLowerCase();
+ if(/allianz/.test(p))return"https://myinsurance.allianz.co.uk/dashboard";if(/\baa\b/.test(p))return"https://auth.theaa.com/login/";
+ if(/fuse/.test(p))return"https://www.fuseenergy.com/app";if(/scratch/.test(p))return"https://community.scratchandpatch.co.uk/login";
+ if(/octopus/.test(p))return"https://octopus.energy/dashboard/";if(/british gas/.test(p))return"https://www.britishgas.co.uk/identity/";
+ if(/edf/.test(p))return"https://my-account.edfenergy.com/";if(/ovo/.test(p))return"https://account.ovoenergy.com/";
+ if(/admiral/.test(p))return"https://www.admiral.com/account/";if(/aviva/.test(p))return"https://www.aviva.co.uk/myaviva/";
+ if(/direct line/.test(p))return"https://www.directline.com/myaccount";if(/hmrc|^tax:/.test(p))return"https://www.gov.uk/personal-tax-account";
+ if(/dvla|vehicle tax/.test(p))return"https://www.gov.uk/check-vehicle-tax";return""}
+function acctBtn(r){const u=acctLink(r);if(!u)return"";const nm=/gov\.uk/.test(u)?(/tax-account/.test(u)?"HMRC account":"DVLA vehicle tax"):String(r[2]||"").split(/[ (]/).filter(w=>!/^any$/i.test(w))[0]||"Provider";
+ return`<a class="b sm acct" href="${esc(u)}" target="_blank" rel="noopener">🔑 ${esc(/hiq/i.test(u)?"HiQ booking":nm+(/gov\.uk/.test(u)?"":" account"))} ↗</a>`}
+function priceCheck(r,row,c){const links=compareLinks(r[0]);const last=money(r[6]),quote=money(r[11]);
+ const isTax=/^tax/i.test(r[0]),isMot=/mot/i.test(r[0]);
+ if(!links.length)return"";
+ const lk=links.map(l=>`<a class="b sm" href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])} ↗</a>`).join("");
+ if(isTax||isMot)return`<div class="links">${acctBtn(r)}${links.filter(l=>!/log-in-file-self-assessment/.test(l[1])).map(l=>`<a class="b sm" href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])} ↗</a>`).join("")}</div>`;
+ const n=c.d?Math.round((c.d-today())/864e5):null;let line;
+ if(last&&quote){const d=quote-last,p=d/last*100;const up=d>0.005;
+  line=`<div class="pc ${up?(p>5?"up":"flat"):"down"}"><b>${up?"▲":"▼"} ${gbp(Math.abs(d))} (${(up?"+":"−")+Math.abs(p).toFixed(0)}%)</b><span>Last year ${gbp(last)} → this year ${gbp(quote)}${up&&p>5?". Worth shopping around.":""}</span></div>`}
+ else if(last)line=`<div class="pc"><b>Last year ${gbp(last)}</b><span>${n!=null&&n<=45?"Renewal is close: fetch the latest price or get quotes now.":n!=null?"Renewal quote usually arrives about 3 to 4 weeks before. I'll compare it when it lands.":"No renewal date yet."}</span></div>`;
+ else if(/kWh/.test(r[9]||"")){const el=(r[9].match(/Electricity\s*([\d.]+p\/kWh)[^.]*?([\d.]+p\/day)/i)||[]),gs=(r[9].match(/Gas\s*([\d.]+p\/kWh)[^.]*?([\d.]+p\/day)/i)||[]);
+  line=`<div class="pc"><b>Your fixed rates</b><span>${el[1]?"Electric "+el[1]+" + "+el[2]:""}${gs[1]?" · Gas "+gs[1]+" + "+gs[2]:""}${/below the .*cap/i.test(r[9])?". Below the current price cap.":""}</span></div>`}
+ else line=`<div class="pc"><span>No price on record yet.</span></div>`;
+ return`<div class="pcard">${line}<div class="links">${acctBtn(r)}<button class="b p sm" data-fetch="${row}">🔄 Fetch latest price</button>${lk}<button class="b sm" data-enterq="${row}">✏️ Enter quote</button></div><p class="nt" id="pf${row}"></p>
+ <div class="qrow" id="qr${row}" ${OPEN.has(row)&&quote?"":"hidden"}><input inputmode="decimal" id="q${row}" placeholder="This year's quote £" value="${quote?quote.toFixed(2):""}" aria-label="This year's quote for ${esc(r[0])}"><button class="b" data-quote="${row}">Save</button></div></div>`}
+function docList(r,row){const items=String(r[12]||"").split("\n").map(s=>s.trim()).filter(Boolean).map(s=>{const i=s.lastIndexOf("|");return i>0?[s.slice(0,i),s.slice(i+1)]:["Document",s]}).filter(d=>/^https:\/\//.test(d[1]));
+ return{n:items.length,html:`<div class="docs"><h4>Documents</h4>${items.map(d=>`<a href="${esc(d[1])}" target="_blank" rel="noopener">📄 ${esc(d[0])}</a>`).join("")||`<span class="nt">None yet. Add the policy, certificate or letter.</span>`}
+ <label class="b up">＋ Add photo or PDF<input type="file" accept="image/*,application/pdf" data-doc="${row}"></label><span class="nt" id="ds${row}"></span></div>`}}
+function renderNext(){
+ const rows=D.ren.slice(1).map((r,i)=>({r,row:i+2,c:classify(r)})).filter(x=>x.r[0]);
+ rows.sort((a,b)=>(a.c.d||9e15)-(b.c.d||9e15));
+ const need=rows.filter(x=>x.c.cls==="late"||x.c.cls==="soon").length,total=rows.length,good=total-need;
+ $("arc").setAttribute("stroke-dasharray",(total?264*good/total:0)+" 264");
+ $("arc").setAttribute("stroke",need?(rows.some(x=>x.c.cls==="late")?"var(--pink)":"var(--amber)"):"var(--ok)");
+ $("dialtxt").textContent=good+"/"+total;
+ const open=D.rev.slice(1).filter(r=>r[1]&&!r[6]).length;
+ $("headline").textContent=!total&&!open?"Nothing tracked yet":need?need+(need===1?" thing needs":" things need")+" action":"All sorted";
+ const nx=rows.find(x=>x.c.d&&x.c.d>=today()&&x.c.cls!=="none");
+ $("heroSub").textContent=nx?"Next: "+nx.r[0].split(":")[0]+" on "+nx.c.d.toLocaleDateString("en-GB",{day:"numeric",month:"short"}):open?open+" found, waiting in To check":"";
+ $("list").innerHTML=rows.map(x=>{const r=x.r,c=x.c;
+  const dt=c.d?`<b>${c.d.getDate()}</b><i>${MON[c.d.getMonth()]} ${String(c.d.getFullYear()).slice(2)}</i>`:`<i>—</i>`;
+  const btn=(c.cls==="late"||c.cls==="soon")&&!/^sorted/i.test(r[8]||"")?`<button class="b p" data-sort="${x.row}">Mark sorted</button>`:"";
+  const pc=priceCheck(r,x.row,c), docs=docList(r,x.row);
+  const nd="";
+  const isTax=/^tax:/i.test(r[0]||""), hasRates=/p\/kWh|standing charge|claims line|cover/i.test(r[9]||"");
+  const chips=[isTax?`<span class="chip tx">🧾 Tax deadline</span>`:"",hasRates?`<span class="chip in">📋 ${/kWh/.test(r[9])?"Your rates":"Policy details"}</span>`:"",`<span class="chip dc">📎 ${docs.n?docs.n+" doc"+(docs.n>1?"s":""):"Add document"}</span>`].filter(Boolean).join("");
+  return `<div class="item ${c.cls}"><div class="date">${dt}</div><button class="what tap" data-open="${x.row}" aria-expanded="${OPEN.has(x.row)}"><b>${esc(r[0])}</b><span>${esc(r[2])}${r[6]?" · "+esc(r[6]):""}${nd}</span><span class="chips">${chips}<em>${OPEN.has(x.row)?"Close ▴":"Tap for details ▾"}</em></span></button><span class="tag">${esc(c.tag)}</span>
+   ${pc?`<div class="act">${pc}</div>`:acctBtn(r)?`<div class="act"><div class="links">${acctBtn(r)}</div></div>`:""}
+   <div class="more" ${OPEN.has(x.row)?"":"hidden"}>${r[9]?`<p class="nt">${esc(r[9])}</p>`:""}${docs.html}</div>
+   ${btn?`<div class="act">${btn}</div>`:""}</div>`}).join("")||`<div class="empty">Renewals you add will appear here in date order.</div>`;
+ const checks=D.stamp.slice(1).filter(r=>r[0]&&r[0]!=="Next check");const nextRow=D.stamp.find(r=>r[0]==="Next check");
+ $("sweep").innerHTML=checks.map(r=>{const d=pdate(r[1]);const age=d?Math.round((today()-d)/864e5):null;
+  const cls=!d?"warn":age>8?"warn":/^(no |not )/i.test(r[2]||"")?"warn":"ok";
+  const t=String(r[1]||"").match(/\d{1,2}:\d{2}/);
+  const when=d?d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})+(t?" "+t[0]:""):"not checked yet";
+  return `<div class="sw ${cls}"><span class="ic">${cls==="ok"?"✓":"!"}</span><b>${esc(r[0])} checked <span>· ${esc(when)}</span></b><small>${esc(r[2])}</small></div>`}).join("")+
+  (nextRow?`<div class="sw"><span class="ic" style="background:var(--sky);color:var(--sea)">→</span><b>Next sweep <span>· ${esc(nextRow[1])}</span></b><small>Runs automatically.</small></div>`:"");
+ const bank=D.stamp.find(r=>/statement|monzo/i.test(r[0]||""));const bd=bank&&pdate(bank[1]);
+ $("bankNote").textContent=!bd?"Drop in a statement PDF (download it from your banking app) and I'll spot regular payments.":Math.round((today()-bd)/864e5)>30?"Time for this month's statement: download it from your banking app and drop it in above.":"Last statement read "+bd.toLocaleDateString("en-GB",{day:"numeric",month:"short"})+". Next one due in about a month.";
+ const last=checks.map(r=>pdate(r[1])).filter(Boolean).sort((a,b)=>b-a)[0];
+ $("stamp").textContent="Your tracker in Google Drive"+(last?" · last sweep "+last.toLocaleDateString("en-GB",{day:"numeric",month:"short"}):"");
+}
+function renderCosts(){
+ const bills=D.bills.slice(1).filter(r=>r[0]&&r[1]&&money(r[4])>0);
+ const yearly=D.ren.slice(1).filter(r=>r[0]&&money(r[6])>0&&!/monthly/i.test(r[7]||"")&&!/^ended/i.test(r[8]||""));
+ const mb=bills.reduce((a,r)=>a+money(r[4]),0),my=yearly.reduce((a,r)=>a+money(r[6])/12,0);
+ $("tot").textContent=gbp(mb+my);$("totSub").textContent=gbp(mb)+" monthly bills + "+gbp(my)+" yearly costs spread · "+gbp((mb+my)*12)+" a year";
+ const max=Math.max(1,...bills.map(r=>money(r[4])),...yearly.map(r=>money(r[6])/12));
+ const bar=(n,v,m)=>`<div class="bar"><span class="n">${esc(n)}</span><span class="v">${gbp(v)}</span><span class="t"><i style="width:${(v/max*100).toFixed(1)}%"></i></span><span class="m">${esc(m)}</span></div>`;
+ $("bills").innerHTML=bills.sort((a,b)=>money(b[4])-money(a[4])).map(r=>bar(r[0],money(r[4]),[r[1],r[3]&&"due "+r[3],r[5]].filter(Boolean).join(" · "))).join("")||`<div class="empty">No monthly bills yet.</div>`;
+ $("yearly").innerHTML=yearly.map(r=>bar(r[0],money(r[6])/12,gbp(money(r[6]))+" a year · "+(r[2]||""))).join("")||`<div class="empty">None yet.</div>`}
+function renderReview(){
+ const rows=D.rev.slice(1).map((r,i)=>({r,row:i+2})).filter(x=>x.r[1]);
+ const open=rows.filter(x=>!x.r[6]),done=rows.filter(x=>x.r[6]);
+ $("pip").hidden=!open.length;$("pip").textContent=open.length;
+ $("qs").innerHTML=open.map(x=>{const r=x.r;return `<div class="card q"><div class="top"><b>${esc(r[1])}</b><span class="amt">${money(r[2])?gbp(money(r[2])):""}</span></div>
+  <p>${esc([r[3],r[4]&&"last "+r[4],r[9]&&"due "+r[9]].filter(Boolean).join(" · "))}<br>${esc(r[5])}</p><input id="n${x.row}" placeholder="Optional note" aria-label="Note for ${esc(r[1])}">
+  <div class="row"><button class="b p" data-dec="Add" data-row="${x.row}">Add to my list</button><button class="b" data-dec="Leave off" data-row="${x.row}">Leave off</button></div></div>`}).join("")||`<div class="empty">✓ Nothing to check. You're up to date.</div>`;
+ $("doneH").hidden=!done.length;
+ $("answered").innerHTML=done.slice(-15).reverse().map(x=>`<div class="done">${esc(x.r[1])}: <b>${esc(x.r[6])}</b></div>`).join("")}
+function renderExtras(){
+ const rows=D.ren.slice(1).map((r,i)=>({r,row:i+2,c:classify(r)})).filter(x=>x.r[0]);
+ const days=d=>d?Math.round((d-today())/864e5):null;
+ const when=x=>{const n=days(x.c.d);return x.c.d?x.c.d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"})+(n!=null?(n<0?` · ${-n} days late`:n===0?" · today":` · ${n} days`):""):"no date yet"};
+ let total=0;
+ $("vault").innerHTML=rows.filter(x=>!/^tax:/i.test(x.r[0])).map(x=>{const d=docList(x.r,x.row);total+=d.n;
+  return `<div class="card vitem"><h3>${esc(x.r[0])}</h3><span class="note">${esc(x.r[2])}${x.r[3]?" · "+esc(x.r[3]):""}</span>${d.html.replace('id="ds'+x.row+'"','id="vs'+x.row+'"')}</div>`}).join("")||`<div class="empty">Nothing tracked yet.</div>`;
+ $("vaultN").textContent=total+(total===1?" document":" documents");
+}
+/* ---------- family ---------- */
+const GSTEPS=["Idea","Bought","Wrapped","Given"];
+function nextOcc(r){const d=pdate(r[2]);if(!d)return null;const end=pdate(r[3]);
+ if(/year/i.test(r[4]||"")){const t=today();let n=new Date(t.getFullYear(),d.getMonth(),d.getDate());if(n<t)n=new Date(t.getFullYear()+1,d.getMonth(),d.getDate());return{d:n,end:null,age:t.getFullYear()-d.getFullYear()+(n.getFullYear()>t.getFullYear()?1:0),born:d.getFullYear()}}
+ return{d,end}}
+const fmtD=d=>d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+const inDays=d=>{const n=Math.round((d-today())/864e5);return n===0?"today":n===1?"tomorrow":n<0?(-n)+" days ago":n+" days"};
+const KICON={birthday:"🎂",anniversary:"💍",term:"🏫",holiday:"🌴",school:"📅",event:"📅"};
+const kicon=k=>KICON[String(k||"").toLowerCase().split(" ")[0]]||"📅";
+function famItems(){return D.fam.slice(1).map((r,i)=>({r,row:i+2,o:nextOcc(r)})).filter(x=>x.r[0]&&!/^profile$/i.test(x.r[5]||""))}
+function people(){const seen=[];D.fam.slice(1).forEach(r=>{const p=String(r[0]||"").trim();if(p&&!seen.includes(p))seen.push(p)});D.gifts.slice(1).forEach(r=>{const p=String(r[0]||"").trim();if(p&&!seen.includes(p))seen.push(p)});return seen}
+function itemLine(x,showWho){const o=x.o,r=x.r;const ongoing=o.end&&o.d<=today()&&o.end>=today();
+ const when=ongoing?"now, until "+fmtD(o.end):fmtD(o.d)+(o.end?" to "+fmtD(o.end):"");
+ const age=o.age&&/birthday/i.test(r[5]||"")&&o.born>1900?` (${o.age})`:"";
+ return`<div class="fi ${ongoing||Math.round((o.d-today())/864e5)<=14?"near":""}"><span class="ic">${kicon(r[5])}</span><div><b>${showWho?esc(r[0])+": ":""}${esc(r[1])}${age}</b><span>${when} · ${ongoing?"on now":inDays(o.d)}</span>${r[6]?`<small>${esc(r[6])}</small>`:""}</div></div>`}
+/* ---------- people & notes ---------- */
+const DEFAULT_PEOPLE=[];const NOPEN=new Set(),NEDIT=new Set();let PEOPLE=[];
+const MIC='<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
+function peopleList(){const s=[];D.fam.slice(1).forEach(r=>{if(/^profile$/i.test(r[5]||"")){const p=String(r[0]||"").trim();if(p&&!s.includes(p))s.push(p)}});return s.length?s:DEFAULT_PEOPLE.slice()}
+const BASE=["next","costs","review","docs"];
+function buildPeople(){const ps=peopleList();if(ps.join("|")===PEOPLE.join("|")&&document.querySelector("[data-padd]"))return;PEOPLE=ps;
+ document.querySelectorAll("nav button[data-pt],section[data-pt]").forEach(n=>n.remove());
+ const nav=$("nav");ps.forEach((p,i)=>{const b=document.createElement("button");b.setAttribute("role","tab");b.setAttribute("aria-selected","false");b.dataset.i=BASE.length+i;b.dataset.pt="1";b.textContent=p;nav.appendChild(b);
+  const s=document.createElement("section");s.className="page";s.dataset.pt="1";
+  s.innerHTML=`<div class="inner"><h2 class="pname">${esc(p)}</h2>
+   <div class="addbar"><button class="mic" data-mic="${i}" id="mic${i}" aria-label="Speak">${MIC}</button><input class="tellin" data-ti="${i}" id="tellIn${i}" placeholder="Add a note, e.g. Term dates" aria-label="Add a note for ${esc(p)}"><button class="b p" data-tellgo="${i}" id="tellGo${i}">Add</button></div>
+   <p class="nt" id="tellMsg${i}"></p><div id="pnotes${i}"></div></div>`;pages.appendChild(s)});
+ const b=document.createElement("button");b.setAttribute("role","tab");b.setAttribute("aria-selected","false");b.dataset.i=BASE.length+ps.length;b.dataset.pt="1";b.textContent="＋";b.setAttribute("aria-label","Add a family member");nav.appendChild(b);
+ const s=document.createElement("section");s.className="page";s.dataset.pt="1";
+ s.innerHTML=`<div class="inner"><h2 class="pname">Add a family member</h2><p class="note">${ps.length?"They get their own page of notes, like everyone else.":"Add yourself and your family. Each person gets their own page of notes: term dates, birthdays, presents, anything."}</p><div class="addbar"><input id="newPerson" placeholder="Name" aria-label="Name"><button class="b p" data-padd="1">Add</button></div><p class="nt" id="paddMsg"></p></div>`;pages.appendChild(s);
+ tabs=[...document.querySelectorAll("nav button")];names=BASE.concat(ps.map(p=>p.toLowerCase()),["add"]);}
+function renderFamily(){buildPeople();
+ PEOPLE.forEach((p,i)=>{const N=D.notes.slice(1).map((r,j)=>({r,row:j+2})).filter(x=>x.r[0]===p&&String(x.r[1]||"").trim());N.reverse();
+  $("pnotes"+i).innerHTML=N.map(x=>{const open=NOPEN.has(x.row),ed=NEDIT.has(x.row),body=String(x.r[2]||"");
+   return`<div class="note-card${open?" open":""}"><button class="nh" data-nopen="${x.row}" aria-expanded="${open}"><b>${esc(x.r[1])}</b><span>${x.r[3]?esc(x.r[3]):""}</span></button>
+    ${open?(ed?`<textarea class="nedit" id="ne${x.row}" rows="${Math.min(18,Math.max(4,body.split("\n").length+1))}">${esc(body)}</textarea><div class="row"><button class="b p sm" data-nsave="${x.row}">Save</button><button class="b sm" data-ncancel="${x.row}">Cancel</button><button class="b sm del" data-ndel="${x.row}">Delete</button></div>`
+     :`<div class="nbody">${esc(body).replace(/\n/g,"<br>")||'<span class="note">Empty. Tap Edit to write it.</span>'}</div><div class="row"><button class="b sm" data-nedit="${x.row}">Edit</button></div>`):""}</div>`}).join("")||`<p class="note">No notes yet. Type a heading above, e.g. “Term dates”, and I'll fill it in.</p>`})}
+function stamp(){const t=new Date();return t.getDate()+" "+["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][t.getMonth()]+" "+t.getFullYear()}
+async function tell(i,text){text=String(text||"").trim();if(!text)return;const who=PEOPLE[i];const say=t=>$("tellMsg"+i).textContent=t;
+ $("tellGo"+i).disabled=true;let title=text.slice(0,80),body="";
+ try{if(sample){say("Filling it in…");
+   const known=D.fam.slice(1).filter(r=>r[0]===who&&!/^profile$/i.test(r[5]||"")).map(r=>[r[1],r[2],r[3]?"to "+r[3]:"",r[6]].filter(Boolean).join(" ")).join("\n");
+   const prof=(D.fam.slice(1).find(r=>r[0]===who&&/^profile$/i.test(r[5]||""))||[])[1]||"";
+   const ans=await sample.json(`Today is ${uk(new Date())} (UK). You keep a family notepad. This page is for ${who}${prof?" ("+prof+")":""}. Family: ${PEOPLE.join(", ")}.
+Facts already on record for ${who}:\n${known||"(none)"}\n
+The user typed: "${text.replace(/"/g,"'")}".
+Make ONE note. If it's a heading (e.g. "Term dates Hele's"), fill the body with everything relevant you know, using the facts on record first; for dates use one line each like "Fri 18 Dec 2026 – Autumn term ends". If it's a sentence of information (e.g. "Bought her a watch, £45"), use a short title and put the sentence in the body. Plain text only, no emojis, no markdown. If something needs checking, end with a line starting "To check:". Return ONLY JSON {"title": short heading, "body": text with \\n line breaks}.`,{modelTier:"default",cache:false});
+   if(ans?.title)title=String(ans.title).slice(0,80);body=String(ans?.body||"")}
+  await append("notes",[[who,title,body,stamp()]]);const row=D.notes.length;NOPEN.add(row);if(!body)NEDIT.add(row);
+  $("tellIn"+i).value="";say("");await log("Note: "+who,title);renderFamily();
+ }catch(e){say(e?.code?errText(e,GS):"Couldn't add that: "+String(e?.message||e).slice(0,120))}
+ $("tellGo"+i).disabled=false}
+let rec=null;
+function startMic(i){const S=window.SpeechRecognition||window.webkitSpeechRecognition;const say=t=>$("tellMsg"+i).textContent=t,inp=$("tellIn"+i),mic=$("mic"+i);
+ if(!S){inp.focus();say("Tap the mic on your keyboard to speak, then Add.");return}
+ if(rec){rec.stop();return}
+ try{rec=new S();rec.lang="en-GB";rec.interimResults=true;
+  rec.onresult=e=>{let s="";for(const r of e.results)s+=r[0].transcript;inp.value=s};
+  rec.onerror=e=>{rec=null;mic.classList.remove("on");inp.focus();say(/not-allowed/.test(e.error)?"Microphone isn't allowed here: use the mic on your keyboard, then Add.":"Didn't catch that. Try again.")};
+  rec.onend=()=>{rec=null;mic.classList.remove("on");if(inp.value.trim())tell(i,inp.value)};
+  rec.start();mic.classList.add("on");say("Listening… tap the mic again to stop.")}catch(e){rec=null;inp.focus();say("Tap the mic on your keyboard to speak, then Add.")}}
+document.addEventListener("keydown",e=>{const t=e.target;if(e.key==="Enter"&&t.classList&&t.classList.contains("tellin"))tell(+t.dataset.ti,t.value)});
+async function noteAct(t){const d=t.dataset;
+ if(d.nopen){const r=+d.nopen;NOPEN.has(r)?(NOPEN.delete(r),NEDIT.delete(r)):NOPEN.add(r);return renderFamily()}
+ if(d.nedit){NEDIT.add(+d.nedit);return renderFamily()}
+ if(d.ncancel){NEDIT.delete(+d.ncancel);return renderFamily()}
+ if(d.nsave){const r=+d.nsave,v=$("ne"+r).value;t.disabled=true;try{await put(q(TABS.notes)+"!C"+r+":D"+r,[[v,stamp()]]);D.notes[r-1][2]=v;D.notes[r-1][3]=stamp();NEDIT.delete(r);renderFamily()}catch(e){t.disabled=false;flash(errText(e,GS))}return}
+ if(d.ndel){const r=+d.ndel;if(t.dataset.sure!=="1"){t.dataset.sure="1";t.textContent="Tap again to delete";return}
+  t.disabled=true;try{await put(q(TABS.notes)+"!A"+r+":D"+r,[["","","",""]]);D.notes[r-1]=["","","",""];NOPEN.delete(r);NEDIT.delete(r);renderFamily()}catch(e){t.disabled=false;flash(errText(e,GS))}return}
+ if(d.padd){const n=$("newPerson").value.trim();if(!n)return;if(PEOPLE.some(p=>p.toLowerCase()===n.toLowerCase())){$("paddMsg").textContent=n+" already has a page.";return}
+  t.disabled=true;try{if(!D.fam.slice(1).some(r=>/^profile$/i.test(r[5]||"")))await append("fam",PEOPLE.map(p=>[p,"","","","","Profile",""]));
+   await append("fam",[[n,"","","","","Profile",""]]);$("newPerson").value="";renderFamily();go(BASE.length+PEOPLE.indexOf(n))}catch(e){flash(errText(e,GS))}t.disabled=false;return}}
+function render(){renderNext();renderCosts();renderReview();renderExtras();renderFamily()}
+
+/* ---------- actions ---------- */
+async function decide(row,dec,btn){
+ const r=D.rev[row-1];const note=($("n"+row)?.value||"").trim();const label=dec+(note?": "+note:"");btn.disabled=true;
+ try{const kind=r[8];let processed="";
+  if(dec==="Add"&&kind){
+   if(kind==="renewal")await append("ren",[[r[1],"",r[10]||"","",r[9]||"","",money(r[2])||"","",r[9]?"Active":"Needs a date",note,"Added from To check"]]);
+   else await append("bills",[[r[1],r[10]||"","",String(r[3]||"").replace(/^monthly,?\s*/i,""),money(r[2])||"",r[3]||"",note]]);
+   processed="Processed "+uk(new Date());await log("Added "+r[1],(kind==="renewal"?"Renewals":"Monthly bills")+(note?"; "+note:""));}
+  else if(kind){processed="Processed "+uk(new Date())}
+  await put(q(TABS.rev)+"!G"+row+":H"+row,[[label,processed||uk(new Date())]]);r[6]=label;r[7]=processed||uk(new Date());render();
+ }catch(e){btn.disabled=false;flash(e?.code==="server_unavailable"||e?.code==="upstream_error"?"Not sure that saved; pull to refresh and check.":errText(e,GS))}}
+async function sorted(row,btn){btn.disabled=true;const v="Sorted "+uk(new Date());
+ try{await put(q(TABS.ren)+"!I"+row,[[v]]);D.ren[row-1][8]=v;render()}catch(e){btn.disabled=false;flash(errText(e,GS))}}
+document.addEventListener("click",ev=>{const t=ev.target.closest("button");if(!t)return;
+ if(t.dataset.i!==undefined)return go(+t.dataset.i);
+ if(t.dataset.open){const row=+t.dataset.open;if(t.dataset.go){OPEN.add(row);render();setTimeout(()=>document.querySelector(`#list [data-open="${row}"]`)?.scrollIntoView({behavior:"smooth",block:"center"}),30);return}OPEN.has(row)?OPEN.delete(row):OPEN.add(row);render();return}
+ if(t.dataset.quote)return saveQuote(+t.dataset.quote,t);
+ if(t.dataset.fetch)return fetchPrice(+t.dataset.fetch,t);
+ if(t.dataset.mic!==undefined)return startMic(+t.dataset.mic);
+ if(t.dataset.tellgo!==undefined){const i=+t.dataset.tellgo;return tell(i,$("tellIn"+i).value)}
+ if(t.dataset.nopen||t.dataset.nedit||t.dataset.ncancel||t.dataset.nsave||t.dataset.ndel||t.dataset.padd)return noteAct(t);
+ if(t.dataset.enterq){const q=$("qr"+t.dataset.enterq);if(q){q.hidden=false;$("q"+t.dataset.enterq)?.focus()}return}
+ if(t.dataset.sort)return sorted(+t.dataset.sort,t);
+ if(t.dataset.dec)return decide(+t.dataset.row,t.dataset.dec,t);
+ if(t.id==="sweepBtn")return sweepEmails();
+ if(t.id==="go")return setup(t)});
+$("pdf").addEventListener("change",e=>{const f=e.target.files[0];e.target.value="";if(f)readStatement(f)});
+
+
+async function fetchPrice(row,btn){const r=D.ren[row-1];const say=t=>{const s=$("pf"+row);if(s)s.textContent=t};
+ if(!sample||!mcp){if(window.LA_openClaude)return LA_openClaude("Price checks");say("Fetching needs the app open in Claude.");return}
+ btn.disabled=true;say("Searching your emails for "+(r[2]||r[0]).split(" (")[0]+"…");
+ try{const prov=String(r[2]||"").split(/[ (]/)[0];const ref=String(r[3]||"").replace(/^[A-Za-z ]*?(ID|ref|number)?:?\s*/i,"").split(/[\s\/]/)[0];
+  const terms=[prov&&`"${prov}"`,ref&&ref.length>4&&`"${ref}"`].filter(Boolean).join(" OR ");
+  const p=await call(GM,"search_threads",{query:`(${terms}) (renewal OR renew OR quote OR premium OR price OR "your new") newer_than:4m -category:promotions`,pageSize:15,view:"THREAD_VIEW_SUMMARY"});
+  const lines=(p?.threads||p?.content?.threads||[]).map(t=>{const m=t.messages?.[0]||{};return[String(m.date||"").slice(0,10),m.sender||"",m.subject||"",(m.snippet||"").replace(/[͏\s]+/g," ").slice(0,300)].join(" | ")});
+  if(!lines.length){say("No renewal quote in your emails yet. It usually arrives 3 to 4 weeks before renewal; I'll catch it on the Monday check.");btn.disabled=false;return}
+  say("Reading "+lines.length+" emails…");
+  const ans=await sample.json(`A UK household is tracking this renewal: "${r[0]}" with ${r[2]}, reference ${r[3]||"unknown"}, renewing ${r[4]||"unknown"}, last year's price ${r[6]||"unknown"}. From these email summaries (date | sender | subject | snippet), find THIS YEAR's renewal price or quote for THIS policy/contract only (not adverts, not other products, not last year's). Return ONLY JSON: {"amount": number in pounds for the whole year or null, "monthly": number or null, "email_date": "dd/mm/yyyy" or "", "summary": one short sentence}.\n\n${lines.join("\n").slice(0,20000)}`,{modelTier:"default",cache:false});
+  let amt=Number(ans?.amount);if(!(amt>0)&&Number(ans?.monthly)>0)amt=Math.round(Number(ans.monthly)*1200)/100;
+  if(amt>0&&amt<100000){await put(q(TABS.ren)+"!L"+row,[[amt]]);D.ren[row-1][11]=String(amt);await log("Renewal quote found: "+r[0],gbp(amt)+(ans?.email_date?" (email "+ans.email_date+")":""));render();
+   const s=$("pf"+row);if(s)s.textContent="Found "+gbp(amt)+(ans?.email_date?" in an email from "+ans.email_date:"")+".";}
+  else{say(ans?.summary?String(ans.summary).slice(0,200)+" No new price yet.":"No new renewal price in your emails yet. I'll keep checking every Monday.");btn.disabled=false}
+ }catch(e){btn.disabled=false;say(e?.code?errText(e,GM):"Couldn't fetch: "+String(e?.message||e).slice(0,120))}}
+async function saveQuote(row,btn){const v=money($("q"+row)?.value);if(!v){flash("Type the quote amount first, e.g. 412.50");return}
+ btn.disabled=true;try{await put(q(TABS.ren)+"!L"+row,[[v]]);D.ren[row-1][11]=String(v);OPEN.add(row);render()}catch(e){btn.disabled=false;flash(errText(e,GS))}}
+let DOCS=null;
+async function docsFolder(){if(DOCS)return DOCS;
+ const p=await call(GD,"search_files",{query:"title = 'Life Admin Documents' and mimeType = 'application/vnd.google-apps.folder' and owner = 'me' and trashed = false",pageSize:5,excludeContentSnippets:true});
+ const f=(p?.files||p?.items||p?.content?.files||[])[0];if(f?.id)return DOCS=f.id;
+ const c=await call(GD,"create_file",{title:"Life Admin Documents",contentMimeType:"application/vnd.google-apps.folder"});return DOCS=c?.id||c?.file?.id}
+document.addEventListener("change",async ev=>{const inp=ev.target;if(!inp.dataset||!inp.dataset.doc)return;const row=+inp.dataset.doc;const f=inp.files&&inp.files[0];inp.value="";if(!f)return;
+ const say=t=>{["ds","vs"].forEach(p=>{const s=$(p+row);if(s)s.textContent=t})};
+ if(!mcp){flash("Adding documents needs the app open in Claude.");return}
+ if(f.size>15*1024*1024){say("That file is over 15 MB. Try a smaller photo.");return}
+ say("Uploading "+f.name+"…");
+ const item=String(D.ren[row-1][0]||"Document").replace(/[:\/\\]/g," -").trim();
+ try{const folder=await docsFolder();if(!folder)throw{code:"tool_error",server:GD,message:"couldn't find or create the Life Admin Documents folder"};
+  let fileArgs=false;try{fileArgs=!!(await mcp.listTools()).fileArgs}catch{}
+  let content;if(fileArgs)content={$file:{data:f,name:f.name.replace(/[^\w.\-]+/g,"_")||"document",type:f.type||"application/octet-stream"}};
+  else{if(f.size>700*1024){say("This view can only upload files under 700 KB. Try a smaller photo.");return}
+   content=await new Promise((ok,no)=>{const rd=new FileReader();rd.onload=()=>ok(String(rd.result).split(",")[1]);rd.onerror=no;rd.readAsDataURL(f)})}
+  const p=await call(GD,"create_file",{title:item+" - "+f.name,parentId:folder,contentMimeType:f.type||"application/octet-stream",disableConversionToGoogleType:true,base64Content:content});
+  const url=p?.viewUrl||p?.file?.viewUrl||(p?.id?"https://drive.google.com/file/d/"+p.id+"/view":"");
+  if(!/^https:\/\//.test(url))throw{code:"tool_error",server:GD,message:"Drive didn't return a link"};
+  const cur=String(D.ren[row-1][12]||"").trim();const nv=(cur?cur+"\n":"")+f.name.replace(/\|/g,"-")+"|"+url;
+  await put(q(TABS.ren)+"!M"+row,[[nv]]);while(D.ren[row-1].length<13)D.ren[row-1].push("");D.ren[row-1][12]=nv;render();say("Saved ✓");
+ }catch(e){const c=e&&e.code;
+  if(c==="server_unavailable"||c==="upstream_error")say("Not sure that uploaded. Check your Life Admin Documents folder in Drive before trying again.");
+  else say(e?.code?errText(e,GD):"Upload failed: "+String(e?.message||e).slice(0,140));}
+});
+
+/* ---------- tabs ---------- */
+const pages=$("pages");let tabs=[...document.querySelectorAll("nav button")],names=["next","costs","review","docs"];
+function mark(i){tabs.forEach((b,j)=>b.setAttribute("aria-selected",j===i));try{tabs[i].scrollIntoView({block:"nearest",inline:"nearest"})}catch{}}
+function go(i,instant){pages.children[i].scrollIntoView({behavior:instant?"auto":"smooth",block:"nearest",inline:"start"});mark(i);try{history.replaceState(null,"","#"+names[i])}catch{}}
+let st;pages.addEventListener("scroll",()=>{clearTimeout(st);st=setTimeout(()=>{const i=Math.round(pages.scrollLeft/pages.clientWidth);mark(i);try{history.replaceState(null,"","#"+names[i])}catch{}},80)});
+document.addEventListener("keydown",e=>{const i=tabs.findIndex(b=>b.getAttribute("aria-selected")==="true");if(e.key==="ArrowRight"&&i<tabs.length-1)go(i+1);if(e.key==="ArrowLeft"&&i>0)go(i-1)});
+
+/* ---------- boot ---------- */
+function showApp(){$("setup").hidden=true;$("pages").hidden=false;$("nav").hidden=false;render();const i=names.indexOf(location.hash.slice(1));if(i>0)setTimeout(()=>go(i,true),50)}
+async function setup(btn){btn.disabled=true;
+ try{await createSheet();showApp();if(sample)await sweepEmails();else flash("Your tracker is ready. Tap “Sweep my emails now” to fill it from your emails.")}
+ catch(e){btn.disabled=false;busy("");flash(errText(e,e?.server))}}
+async function boot(){
+ const [m,s]=await Promise.all([window.claude?.use("mcp").catch(()=>null),window.claude?.use("sample").catch(()=>null)]);
+ mcp=m;sample=s;$("setup").hidden=false;
+ if(!mcp){$("stamp").textContent="";$("noclaude").hidden=false;return}
+ try{busy("Looking for your tracker…");SHEET=await findSheet()}
+ catch(e){busy("");$("start").hidden=false;flash(errText(e,GD));return}
+ busy("");
+ if(!SHEET){$("stamp").textContent="Welcome";$("start").hidden=false;return}
+ showApp();$("stamp").textContent="Loading your tracker…";
+ try{await loadAll()}catch(e){flash(errText(e,GS))}
+ const em=D.stamp.find(r=>r[0]==="Emails");const d=em&&pdate(em[1]);
+ document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&SHEET)loadAll().catch(()=>{})});
+ if(!d||(today()-d)/864e5>=7)flash("It's been a week since your last email sweep. Tap “Sweep my emails now” to check for anything new.");
+}
+let tries=0;(function wait(){if(window.claude)return boot();if(++tries<20)return setTimeout(wait,150);$("setup").hidden=false;$("noclaude").hidden=false;$("stamp").textContent=""})();
+}
+</script>
+<script>
+(function(){var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+ var sa=navigator.standalone===true||matchMedia("(display-mode: standalone)").matches;var seen=false;try{seen=localStorage.getItem("la_a2hs")}catch(e){}
+ if(!sa&&!seen&&!document.getElementById("gsignin")){var d=document.createElement("div");d.id="a2hs";
+  d.innerHTML=(ios?"Put Life Admin on your home screen: tap <b>Share</b> then <b>Add to Home Screen</b>.":"Put Life Admin on your home screen: tap <b>\u22ee</b> then <b>Install app</b> (or Add to Home screen).")+'<button aria-label="Close">\u00d7</button>';
+  d.querySelector("button").onclick=function(){d.remove();try{localStorage.setItem("la_a2hs","1")}catch(e){}};document.body.appendChild(d)}
+ var v=document.getElementById("vault");if(v&&window.LA_signOut){var b=document.createElement("button");b.className="signout";b.textContent="Sign out";b.onclick=window.LA_signOut;v.parentNode.appendChild(b)}})();
 </script>
 </body>
 </html>
