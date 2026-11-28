@@ -618,10 +618,12 @@ let tries=0;(function wait(){if(window.claude)return boot();if(++tries<20)return
   var sp=document.createElement("div");sp.id="splash";document.body.appendChild(sp);
   var greet=function(n){var h=new Date().getHours();return (h<5?"Up late, ":h<12?"Good morning, ":h<17?"Good afternoon, ":"Good evening, ")+n};
   var show=function(n){sp.innerHTML='<img src="icon-512.png" alt=""><h1>'+greet(n).replace(/[<>&]/g,"")+'</h1><p>Getting your life admin…</p><div class="bar"><i></i></div>';
-   setTimeout(function(){sp.classList.add("out");setTimeout(function(){sp.remove()},500)},1900)};
+   var gone=false,done=function(){if(gone)return;gone=true;sp.classList.add("out");setTimeout(function(){sp.remove()},500)};
+   setTimeout(done,1900);setTimeout(function(){if(sp.parentNode)sp.remove()},4500);sp.addEventListener("click",done)};
   var name=ls("la_name");
   if(name)show(name);else{sp.innerHTML='<img src="icon-512.png" alt=""><h1>Welcome to Life Admin</h1><p>What should I call you?</p><form><input placeholder="Your first name" aria-label="Your first name" maxlength="30" autocomplete="given-name"><button>Let’s go</button></form>';
-   var f=sp.querySelector("form");f.onsubmit=function(ev){ev.preventDefault();var v=f.querySelector("input").value.trim();if(!v)return;v=v.charAt(0).toUpperCase()+v.slice(1);ls("la_name",v);show(v)};
+   var f=sp.querySelector("form");f.onsubmit=function(ev){ev.preventDefault();var v=f.querySelector("input").value.trim();if(!v)return;
+    try{document.activeElement.blur()}catch(e){}var vp=document.querySelector('meta[name=viewport]');if(vp){vp.setAttribute("content","width=device-width, initial-scale=1, maximum-scale=1");setTimeout(function(){vp.setAttribute("content","width=device-width, initial-scale=1")},800)}window.scrollTo(0,0);v=v.charAt(0).toUpperCase()+v.slice(1);ls("la_name",v);show(v)};
    setTimeout(function(){var i=sp.querySelector("input");if(i)i.focus()},300)}
  }
  /* install prompt */
